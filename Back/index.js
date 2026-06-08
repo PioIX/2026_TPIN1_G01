@@ -24,3 +24,37 @@ app.listen(port, function(){
 
 //Colocar su codigo a partir de aca
 
+app.get('/usuarios', async function (req, res) {
+    try {
+ 
+        let respuesta = await realizarQuery(`SELECT * FROM Usuarios`);
+        res.send(respuesta);
+    }
+
+    catch (error) {
+        res.status(500).send({ error: error.message });
+    }
+})
+
+
+app.post('/usuarios', async function (req, res) {
+    try {
+
+        let usuarioExistente = await realizarQuery(`SELECT * FROM Usuarios WHERE mail="${req.body.mail}" `);
+        console.log(usuarioExistente)
+
+        if (animalExistente.length > 0) {
+            res.send("El usuario ya existe");
+
+        } else {
+            await realizarQuery(`
+            INSERT INTO Usuarios (nombre_usuario,mail,contraseña) VALUES ("${req.body.nombre_usuario}","${req.body.mail}",${req.body.contraseña});`)
+            res.send({message:"usuario agregado"})
+        }
+
+
+    } catch (error) {
+        res.status(500).send({ error: error.message })
+    }
+})
+
