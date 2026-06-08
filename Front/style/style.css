@@ -1,35 +1,64 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial, Helvetica, sans-serif;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-header{
-    position:fixed;
-    top:0;
-    left:0;
-
-    width:100%;
-    min-height:90px;
-
-    background:#000;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    padding:1rem 0;
-
-    z-index:1000;
+@font-face {
+    font-family: 'Power Grotesk';
+    src: url('../fonts/PowerGrotesk-Regular.woff2') format('woff2'),
+         url('../fonts/PowerGrotesk-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
 }
 
-header h1{
-    margin:0;
-    color:white;
-    font-size:2.5rem;
-    font-weight:bold;
-    text-align:center;
+body {
+    font-family: 'Power Grotesk', sans-serif;
+}
+
+body {
+    background: #0a0e1a;
+    min-height: 100vh;
+    
+    background-image: url('../images/fondo.png');
+    background-size: cover;      /* cubre toda la pantalla */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* no se mueve al scrollear */
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background:
+        radial-gradient(ellipse 55% 60% at 75% 55%, rgba(0,180,70,0.18) 0%, transparent 65%),
+        radial-gradient(ellipse 45% 55% at 25% 55%, rgba(0,60,180,0.18) 0%, transparent 65%);
+    pointer-events: none;
+}
+
+/* ---------- HEADER ---------- */
+header {
+    position: relative;
+    width: 100%;
+    min-height: 60px;
+    background: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem 0;
+}
+
+header h1 {
+    margin: 0;
+    color: white;
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-align: center;
+    letter-spacing: 2px;
 }
 
 .logo {
@@ -37,43 +66,180 @@ header h1{
     right: 2rem;
     top: 50%;
     transform: translateY(-50%);
-    height: 5rem;
+    height: 3.5rem;
     width: auto;
 }
 
-footer{
-    position:fixed;
-    bottom:0;
-    left:0;
-
-    width:100%;
-    background:#000;
-    border-top:2px solid #fff;
-
-    min-height:1rem;
-    padding:0.5rem;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    z-index:1000;
+/* ---------- FOOTER ---------- */
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #000;
+    border-top: 2px solid #fff;
+    min-height: 1rem;
+    padding: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
 }
 
-footer h4{
-    color:white;
-    margin:0;
-    text-align:center;
-    font-size:0.7rem;
+footer h4 {
+    color: white;
+    margin: 0;
+    text-align: center;
+    font-size: 0.7rem;
 }
 
+/* ---------- COLORES ---------- */
+.h_green, .higher_green { color: rgb(0, 255, 42); }
+.l_red,   .lower_red   { color: rgb(255, 0, 0); }
 
-.h_green,
-.higher_green{
-    color:rgb(0,255,42);
+main {
+    position: relative;
+    z-index: 1;
+    min-height: calc(100vh - 60px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem 6rem 60px 6rem;
+    margin-left: 10rem;
 }
 
-.l_red,
-.lower_red{
-    color:rgb(255,0,0);
+.menu-botones {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    width: 300px;
+}
+
+.fila-jugar {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.btn-info {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #555;
+    color: white;
+    border: none;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    flex-shrink: 0;
+    position: absolute;
+    left: -48px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: background 0.2s;
+}
+
+.btn-info:hover { background: #888; }
+
+.tooltip {
+    display: none;
+    position: absolute;
+    left: 45px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #111;
+    color: #ddd;
+    border: 1px solid #444;
+    border-radius: 6px;
+    padding: 0.7rem 1rem;
+    font-size: 0.8rem;
+    width: 220px;
+    line-height: 1.5;
+    z-index: 100;
+    pointer-events: none;
+}
+
+.tooltip::before {
+    content: '';
+    position: absolute;
+    left: -7px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-width: 6px 7px 6px 0;
+    border-style: solid;
+    border-color: transparent #444 transparent transparent;
+}
+
+.btn-info:hover .tooltip { display: block; }
+
+.btn {
+    display: block;
+    width: 100%;
+    padding: 0.8rem 1rem;
+    font-size: 0.95rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    transition: filter 0.15s, transform 0.1s, box-shadow 0.15s;
+}
+
+.btn:hover  { filter: brightness(1.15); transform: scale(1.02); }
+.btn:active { transform: scale(0.98); }
+
+.btn-jugar {
+    width: 100%;
+    background: #2ecc40;
+    color: white;
+    box-shadow: 0 0 16px rgba(46, 204, 64, 0.4);
+    padding: 0.8rem 1rem;
+    font-size: 0.95rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    transition: filter 0.15s, transform 0.1s, box-shadow 0.15s;
+}
+
+.btn-jugar:hover {
+    filter: brightness(1.15);
+    transform: scale(1.02);
+    box-shadow: 0 0 28px rgba(46, 204, 64, 0.65);
+}
+
+.btn-blanco {
+    background: white;
+    color: #111;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.btn-rojo {
+    background: #e74c3c;
+    color: white;
+    box-shadow: 0 0 14px rgba(231, 76, 60, 0.35);
+}
+
+.btn-rojo:hover {
+    box-shadow: 0 0 26px rgba(231, 76, 60, 0.65);
+}
+
+/* ---------- LOGO DERECHA ---------- */
+.menu-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    margin-left: 10rem;
+}
+
+.menu-logo img {
+    height:20rem;
+    width: auto;
+    filter: drop-shadow(0 0 30px rgba(0, 255, 60, 0.3));
 }

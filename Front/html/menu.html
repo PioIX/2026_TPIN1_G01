@@ -7,6 +7,9 @@
 	<title>game menu</title>
 	<link rel="stylesheet" href="../style/style.css">
     <link rel="icon" href="../images/icono/logo_FIFALICHI.ico">
+	
+	<meta charset="UTF-8">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 	<header class="main-header">
@@ -19,8 +22,25 @@
 		</div>
 	</header>
 	<main>
-		
-	</main>
+        <div class="menu-botones">
+            <div class="fila-jugar">
+                <button class="btn-info">i</button>
+                <a class="btn btn-jugar" href="game.html">JUGAR</a>
+            </div>
+			<br>
+            <a class="btn btn-blanco" href="filters.html">FILTROS</a>
+			<br>
+            <a class="btn btn-blanco" href="mode.html">MODO</a>
+			<br>
+            <a class="btn btn-blanco" href="points.html">TABLA DE PUNTAJE</a>
+			<br>
+            <button class="btn btn-rojo" onclick="logOut()">CERRAR SESION</button>
+        </div>
+ 
+        <div class="menu-logo">
+            <img src="../images/logo_FIFALICHI.png" alt="Logo FIFALICHI">
+        </div>
+    </main>
 	
 	<footer>
 		<hr>
