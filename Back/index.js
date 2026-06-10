@@ -43,7 +43,7 @@ app.post('/usuarios', async function (req, res) {
         let usuarioExistente = await realizarQuery(`SELECT * FROM Usuarios WHERE mail="${req.body.mail}" `);
         console.log(usuarioExistente)
 
-        if (animalExistente.length > 0) {
+        if (usuarioExistente.length > 0) {
             res.send("El usuario ya existe");
 
         } else {

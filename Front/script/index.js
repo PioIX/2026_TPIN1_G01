@@ -22,12 +22,20 @@ function login(){
     return false
 }
 
-function register(){
-    const datos={
-        mail=getMail(),
-        contraseña=getContraseña(),
-        nombre=getNombre()
-    };
+async function register(){
+    const u_mail=getMail();
+    const u_contraseña=getContraseña();
+    const u_nombre=getNombre();
+    if (u_mail=="" || u_contraseña=="" || u_nombre==""){
+        alert("Rellene todos los campos")
+        return
+    }
+    
+        const datos={
+            mail:u_mail,
+            contraseña:u_contraseña,
+            nombre:u_nombre
+        };
 
     const response = await fetch('http://localhost:4000/usuarios',{
             method:"POST", //GET, POST, PUT o DELETE
