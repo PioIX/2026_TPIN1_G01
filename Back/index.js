@@ -48,7 +48,7 @@ app.post('/usuarios', async function (req, res) {
 
         } else {
             await realizarQuery(`
-            INSERT INTO Usuarios (nombre_usuario,mail,contraseña) VALUES ("${req.body.nombre_usuario}","${req.body.mail}",${req.body.contraseña});`)
+            INSERT INTO Usuarios (nombre_usuario,mail,contrasena) VALUES ("${req.body.nombre_usuario}","${req.body.mail}","${req.body.contraseña}");`)
             res.send({message:"usuario agregado"})
         }
 

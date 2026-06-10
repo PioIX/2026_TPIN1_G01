@@ -5,37 +5,34 @@ async function llamadoUsuarios() {
             "Content-Type": "application/json",
           },
     })
-    document.getElementById("lista").innerHTML=""
     let result = await response.json();
     return result
 }
 
-function login(){
-    const mail=getMail();
-    const contraseña=getContraseña();
-    const usuarios=llamadoUsuarios()
-    for (let usuario in usuarios){
-        if (usuario.contraseña==contraseña && usuario.mail==mail){
+async function login(mail,contraseña){
+
+    const usuarios= await llamadoUsuarios();
+    console.log(usuarios)
+    for (let usuario of usuarios){
+        if (usuario.contrasena==contraseña && usuario.mail==mail){
             return true
         }
     }
     return false
 }
 
-async function register(){
-    const u_mail=getMail();
-    const u_contraseña=getContraseña();
-    const u_nombre=getNombre();
-    if (u_mail=="" || u_contraseña=="" || u_nombre==""){
-        alert("Rellene todos los campos")
+async function handleLogin(){
+    const mail=getMail()
+    const contrasena=getContraseña()
+
+    if(await login(mail,contrasena)){
+        window.location.href = "menu.html";
         return
     }
-    
-        const datos={
-            mail:u_mail,
-            contraseña:u_contraseña,
-            nombre:u_nombre
-        };
+}
+
+async function register(datos){
+
 
     const response = await fetch('http://localhost:4000/usuarios',{
             method:"POST", //GET, POST, PUT o DELETE
@@ -44,5 +41,26 @@ async function register(){
             },
             body: JSON.stringify(datos) //JSON.stringify convierte de objeto a JSON
         })
-        console.log("hecho")
+        if(await login(datos.mail,datos.contrasena)){
+        window.location.href = "menu.html";
+        return
+    }
+}
+
+async function handleRegister() {
+    const u_mail=getMail();
+    const u_contraseña=getContraseña();
+    const u_nombre=getNombre();
+
+    console.log(u_mail,u_contraseña,u_nombre)
+    if (u_mail=="" || u_contraseña=="" || u_nombre==""){
+        alert("Rellene todos los campos")
+        return
+    }
+    const datos={
+            mail:u_mail,
+            contrasena:u_contraseña,
+            nombre_usuario:u_nombre
+        };
+    register(datos)
 }
