@@ -24,6 +24,7 @@ app.listen(port, function () {
 
 //Colocar su codigo a partir de aca
 
+
 app.get("/jugadores", async function (req, res) {
     try {
 
@@ -42,4 +43,62 @@ app.get("/jugadores", async function (req, res) {
         res.status(500).send({ error: error.message });
     }
 })
+
+
+//Agarrar usuarios de la base de datos
+app.get('/usuarios', async function (req, res) {
+    try {
+ 
+        let respuesta = await realizarQuery(`SELECT * FROM Usuarios`);
+        res.send(respuesta);
+    }
+
+    catch (error) {
+        res.status(500).send({ error: error.message });
+    }
+})
+
+//Registro para agregar un usuario a la base de datos, o sea que el usuario ponga un nombre en el campo, un mail, una contraseña y cuando toca el boton registro se guarde ese usuario y se sume a la base de datos
+app.post('/usuarios', async function (req, res) {
+    try {
+
+        let usuarioExistente = await realizarQuery(`SELECT * FROM Usuarios WHERE mail="${req.body.mail}"`);
+        console.log(usuarioExistente)
+
+        if (usuarioExistente.length > 0) {
+            res.send("El usuario ya existe");
+
+        } else {
+            await realizarQuery(`INSERT INTO Usuarios (nombre_usuario,mail,contrasena, es_admin) VALUES ("${req.body.nombre_usuario}","${req.body.mail}","${req.body.contrasena}", false);`)
+            res.send({message:"usuario agregado"})
+        }
+
+    } catch (error) {
+        res.status(500).send({ error: error.message })
+    }
+})
+
+//Iniciar sesion (login)
+app.post('/login', async function (req, res) {
+    try {
+
+        let usuario = await realizarQuery(`
+            SELECT * FROM Usuarios WHERE mail="${req.body.mail}" AND contrasena="${req.body.contrasena}"`);
+
+        if (usuario.length > 0) {
+            res.send({
+                message: "Login exitoso"
+            });
+
+        } else {
+            res.send({
+                message: "Mail o contraseña incorrectos"
+            });
+
+        }
+
+    } catch (error) {
+        res.status(500).send({ error: error.message });
+    }
+});
 
