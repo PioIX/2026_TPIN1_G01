@@ -88,3 +88,8 @@ async function handleRegister() {
         };
     register(datos)
 }
+
+function imagenesJugadores(img1,img2){
+    document.getElementById("img_player1").src = img1;
+    document.getElementById("img_player2").src = img2;
+}
