@@ -21,8 +21,8 @@ async function llamadoJugadores(filtro){
     return result
 }
 
-async function llamadoUsuarios() {
-    const response = await fetch('http://localhost:4000/usuarios',{
+async function id_pais() {
+    const response = await fetch('http://localhost:4000/id_pais',{
         method:"GET", 
         headers: {
             "Content-Type": "application/json",
@@ -32,6 +32,8 @@ async function llamadoUsuarios() {
     let result = await response.json();
     return result
 }
+
+
 
 async function login(mail,contraseña){
 
@@ -88,3 +90,27 @@ async function handleRegister() {
         };
     register(datos)
 }
+
+function agregarFutbolista() {
+  let datos = {
+    url_foto:add_imagen(),
+    nombre:add_nombre(),
+    club:add_club(),
+    id_club:add_id_club(),
+    id_pais:add_id_pais(),
+    pais:add_pais(),
+    posicion:add_posicion(),
+
+  };
+  envioPost(datos);
+}
+
+async function envioPost(datos) {
+  await fetch(
+    'http://localhost:4000/jugadores', {
+      method:  "POST",
+      headers: { "Content-Type": "application/json" },
+      body:    JSON.stringify(datos)
+  });
+}
+
