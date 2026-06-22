@@ -42,12 +42,35 @@ header h1 {
     letter-spacing: 2px;
 }
 
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    width: 100%;
+    position: relative;
+}
+
+.header-container h1,
+.header-container h2 {
+    margin: 0;
+    color: white;
+    font-size: 1.8rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
 .logo {
     position: absolute;
     right: 2rem;
     top: 50%;
     transform: translateY(-50%);
     height: 3.5rem;
+    width: auto;
+}
+
+.logo img {
+    height: 100%;
     width: auto;
 }
 
@@ -90,8 +113,10 @@ main {
 main.main-menu {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 2rem 6rem 60px 6rem;
+    justify-content: center;
+    gap: 8rem;
+    padding: 2rem 2rem 60px 2rem;
+    margin-left: 15rem;
 }
 
 /* ---------- MAIN LOGIN (login.html) ---------- */
@@ -297,7 +322,7 @@ input:focus, select:focus {
 }
 
 .menu-logo img {
-    height: 260px;
+    height: 380px;
     width: auto;
     filter: drop-shadow(0 0 30px rgba(0, 255, 60, 0.3));
 }
