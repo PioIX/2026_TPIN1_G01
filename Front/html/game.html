@@ -20,13 +20,17 @@
 	</header>
 <main class="main-game">
     <div class="player-card">
+		<p class="player-text" id="name1"></p>
         <img src="" alt="Jugador 1" class="player-img" id="img_player1" referrerpolicy="no-referrer">
-        <p class="player-text" id="txt_player1">Nombre del jugador 1</p>
+        <p class="player-text" id="stat1">Nombre del jugador 1</p>
+		<button id="jugador1" onclick="comparar(1)">Elegir</button>
     </div>
 
     <div class="player-card">
+		<p class="player-text" id="name2"></p>
         <img src="" alt="Jugador 2" class="player-img" id="img_player2" referrerpolicy="no-referrer">
-        <p class="player-text" id="txt_player2">Nombre del jugador 2</p>
+        <p class="player-text" id="stat2">Nombre del jugador 2</p>
+		<button id="jugador2" onclick="comparar(2)">Elegir</button>
     </div>
 </main>
 	
@@ -35,5 +39,6 @@
 		<h4>pagina oficial de FIFALICHI © | <strong>FIFALICHI</strong> <b class="h_green">H</b>o<b class="l_red">L</b> | Borda, Garcea, Piscolichi y Rey</h4>
 	</footer>
 	<script src="/Front/script/index.js"></script>
+	<script src="/Front/script/juego.js"></script>
 </body>
 </html>

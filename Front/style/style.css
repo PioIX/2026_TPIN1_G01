@@ -351,4 +351,5 @@ input:focus, select:focus {
 .player-text {
     margin-top: 10px;
     font-weight: bold;
+    color: white;
 }
