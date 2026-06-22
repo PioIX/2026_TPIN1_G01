@@ -9,3 +9,52 @@ function getMail(){
 function getContraseña(){
     return document.getElementById("contraseña").value;
 };
+
+
+
+
+function add_nombre(){
+    return document.getElementById("add-nombre").value
+}
+function add_pais(){
+    return document.getElementById("add-nombre").value
+}
+function add_id_pais(){
+    a = document.getElementById("add-pais").value
+    async function id_pais(pais) {
+        const response = await fetch(`http://localhost:4000/id_pais?pais = ${pais}`,{
+            method:"GET", 
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+        let result = await response.json();
+        return result
+    }
+    return id_pais(a)
+}
+function add_liga(){
+    return document.getElementById("add-liga").value
+}
+function add_id_liga(){
+    a = document.getElementById("add-liga").value
+    async function id_liga(liga) {
+        const response = await fetch(`http://localhost:4000/id_liga?liga = ${liga}`,{
+            method:"GET", 
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+        let result = await response.json();
+        return result
+    }
+    return id_liga(a)
+}
+
+function add_imagen(){
+    return document.getElementById("add-imagen").value
+}
+
+function add_posicion(){
+    return document.getElementById("add-posicion").value
+}

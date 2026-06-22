@@ -102,3 +102,74 @@ app.post('/login', async function (req, res) {
     }
 });
 
+app.get("/id_pais", async function(req, res) {
+  try {
+    const filas = await realizarQuery(
+      `select distinct id_pais from Jugadores WHERE pais=${req.query.pais}`
+    );
+    res.send(filas);
+  } catch(error) {
+    res.send(error.message);
+  }
+});
+
+app.get("/id_liga", async function(req, res) {
+  try {
+    const filas = await realizarQuery(
+      `select distinct id_liga from Jugadores WHERE liga =${req.query.liga}`
+    );
+    res.send(filas);
+  } catch(error) {
+    res.send(error.message);
+  }
+});
+
+app.post("/jugadores", async function(req, res) {
+  try {
+    await realizarQuery(`INSERT INTO Jugadores
+       (url_foto, nombre, id_liga, liga, pais, id_pais, posicion)
+       VALUES (
+        "${req.body.url_foto}",
+        "${req.body.nombre}",
+        ${req.body.id_liga},
+        "${req.body.liga}",
+        "${req.body.pais}",
+        ${req.body.id_region},
+        ${req.body.posicion}
+        )`);
+    res.send("añadido correctamente");
+  } catch(error) {
+    res.send(error.message);
+  }
+});
+
+app.delete("/jugadores", async function(req, res) {
+  try {
+    await realizarQuery(
+      `DELETE FROM Jugadores
+       WHERE id_jugador=${req.body.id}`
+    );
+  } catch(error) {
+    res.send(error.message);
+  }
+});
+
+
+app.put("/jugadores", async function(req, res) {
+  try {
+    await realizarQuery(
+      `UPDATE Jugadores SET
+        url_foto="${req.body.url_foto}",
+        nombre="${req.body.nombre}",
+        id_liga=${req.body.id_liga},
+        liga="${req.body.liga}",
+        pais="${req.body.pais}",
+        id_region=${req.body.id_region},
+        posicion=${req.body.posicion}
+       WHERE id_jugador=${req.body.id}`
+    );
+  } catch(error) {
+    res.send(error.message);
+  }
+});
+

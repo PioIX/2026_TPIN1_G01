@@ -224,6 +224,182 @@ input:focus, select:focus {
     box-shadow: 0 0 0 2px #2ecc40;
 }
 
+/* ---------- MAIN ADMIN ---------- */
+main.main-admin {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 4rem 80px 4rem;
+    gap: 2rem;
+}
+
+.admin-title {
+    color: white;
+    font-size: 1.6rem;
+    letter-spacing: 3px;
+    font-weight: bold;
+    text-align: center;
+    margin: 0;
+}
+
+/* ---------- GRID ---------- */
+.admin-grid {
+    display: grid;
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 1200px;
+    align-items: start;
+}
+
+/* ---------- CARDS ---------- */
+.admin-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.admin-card h3 {
+    color: white;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    font-weight: bold;
+    margin: 0 0 0.4rem 0;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.admin-card h3 .icon {
+    margin-right: 8px;
+    font-size: 1rem;
+}
+
+.card-eliminar h3       { border-color: rgba(231, 76, 60, 0.4); }
+.card-eliminar h3 .icon { color: #e74c3c; }
+
+.card-agregar h3        { border-color: rgba(46, 204, 64, 0.4); }
+.card-agregar h3 .icon  { color: #2ecc40; }
+
+.card-editar h3         { border-color: rgba(52, 152, 219, 0.4); }
+.card-editar h3 .icon   { color: #3498db; }
+
+/* ---------- INPUTS DENTRO DE CARDS ---------- */
+.admin-card input[type="text"],
+.admin-card input[type="number"],
+.admin-card select {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 0.88rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    border: none;
+    border-radius: 5px;
+    background: white;
+    color: #111;
+    outline: none;
+}
+
+.admin-card input::placeholder {
+    color: #777;
+    font-weight: normal;
+}
+
+.admin-card input:focus,
+.admin-card select:focus       { box-shadow: 0 0 0 2px #2ecc40; }
+.card-eliminar input:focus     { box-shadow: 0 0 0 2px #e74c3c; }
+.card-editar   input:focus     { box-shadow: 0 0 0 2px #3498db; }
+
+/* ---------- BOTONES ADMIN ---------- */
+.btn-admin {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 0.88rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: filter 0.15s, transform 0.1s, box-shadow 0.15s;
+    margin-top: 0.2rem;
+}
+
+.btn-admin:hover  { filter: brightness(1.15); transform: scale(1.02); }
+.btn-admin:active { transform: scale(0.98); }
+
+.btn-eliminar { background: #e74c3c; color: white; box-shadow: 0 0 14px rgba(231, 76, 60, 0.35); }
+.btn-agregar  { background: #2ecc40; color: white; box-shadow: 0 0 14px rgba(46, 204, 64, 0.35); }
+.btn-editar   { background: #3498db; color: white; box-shadow: 0 0 14px rgba(52, 152, 219, 0.35); }
+
+.btn-eliminar:hover { box-shadow: 0 0 26px rgba(231, 76, 60, 0.65); }
+.btn-agregar:hover  { box-shadow: 0 0 26px rgba(46, 204, 64, 0.65); }
+.btn-editar:hover   { box-shadow: 0 0 26px rgba(52, 152, 219, 0.65); }
+
+/* ---------- FILA ID + BUSCAR ---------- */
+.edit-id-row {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.edit-id-row input { flex: 1; }
+
+.edit-id-row button {
+    padding: 0.75rem 1rem;
+    font-size: 0.8rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background: #555;
+    color: white;
+    white-space: nowrap;
+    transition: filter 0.15s, transform 0.1s;
+}
+
+.edit-id-row button:hover  { filter: brightness(1.2); }
+.edit-id-row button:active { transform: scale(0.98); }
+
+/* ---------- GRILLA CAMPOS EDITAR ---------- */
+.edit-fields-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0.6rem;
+}
+
+.fields-divider {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.08);
+    margin: 0.3rem 0;
+}
+
+/* ---------- TOAST ---------- */
+#toast {
+    position: fixed;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: #222;
+    color: white;
+    padding: 0.7rem 1.5rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    opacity: 0;
+    transition: opacity 0.3s, transform 0.3s;
+    pointer-events: none;
+    z-index: 9999;
+    border-left: 4px solid #2ecc40;
+    white-space: nowrap;
+}
+
+#toast.show  { opacity: 1; transform: translateX(-50%) translateY(0); }
+#toast.error { border-left-color: #e74c3c; }
+#toast.info  { border-left-color: #3498db; }
+
 /*MENU BOTONES*/
 .menu-botones {
     display: flex;
