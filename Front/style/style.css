@@ -502,3 +502,11 @@ main.main-admin {
 .seccion + .seccion {
     margin-top: 1rem;
 }
+
+.stats-label {
+    color: rgba(255,255,255,0.5);
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    font-weight: bold;
+    margin: 0.2rem 0 0 0;
+}

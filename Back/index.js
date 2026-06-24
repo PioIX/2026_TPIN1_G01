@@ -31,10 +31,10 @@ app.get("/jugadores", async function (req, res) {
         let result;
         if (req.query.filtro == undefined) {
 
-            result = await realizarQuery(`SELECT url_foto,nombre,id_liga,liga,id_pais,pais,posicion,Cartas.* FROM Jugadores INNER JOIN Cartas ON Cartas.id_jugador = Jugadores.id_jugador ORDER BY RAND() LIMIT 100`)
+            result = await realizarQuery(`SELECT nombre,id_liga,liga,id_pais,pais,posicion,Cartas.* FROM Jugadores INNER JOIN Cartas ON Cartas.id_jugador = Jugadores.id_jugador ORDER BY RAND() LIMIT 100`)
         } else {
 
-            result = await realizarQuery(`SELECT url_foto,nombre,id_liga,liga,id_pais,pais,posicion,Cartas.* FROM Jugadores INNER JOIN Cartas ON Cartas.id_jugador = Jugadores.id_jugador WHERE ${req.query.categoria}=${req.query.filtro} ORDER BY RAND() LIMIT 100`)
+            result = await realizarQuery(`SELECT nombre,id_liga,liga,id_pais,pais,posicion,Cartas.* FROM Jugadores INNER JOIN Cartas ON Cartas.id_jugador = Jugadores.id_jugador WHERE ${req.query.categoria}=${req.query.filtro} ORDER BY RAND() LIMIT 100`)
         }
 
         res.send(result)
@@ -105,7 +105,7 @@ app.post('/login', async function (req, res) {
 app.get("/id_pais", async function(req, res) {
   try {
     const filas = await realizarQuery(
-      `select distinct id_pais from Jugadores WHERE pais=${req.query.pais}`
+      `select distinct id_pais from Jugadores WHERE pais="${req.query.pais}"`
     );
     res.send(filas);
   } catch(error) {
@@ -115,8 +115,9 @@ app.get("/id_pais", async function(req, res) {
 
 app.get("/id_liga", async function(req, res) {
   try {
+    console.log(req.query)
     const filas = await realizarQuery(
-      `select distinct id_liga from Jugadores WHERE liga =${req.query.liga}`
+      `select distinct id_liga from Jugadores WHERE liga ="${req.query.liga}"`
     );
     res.send(filas);
   } catch(error) {
@@ -134,10 +135,36 @@ app.post("/jugadores", async function(req, res) {
         ${req.body.id_liga},
         "${req.body.liga}",
         "${req.body.pais}",
-        ${req.body.id_region},
+        ${req.body.id_pais},
         ${req.body.posicion}
         )`);
-    res.send("añadido correctamente");
+
+      const resultado = await realizarQuery(`
+          SELECT id_jugador
+          FROM Jugadores
+          WHERE nombre = "${req.body.nombre}"
+          ORDER BY id_jugador DESC
+          LIMIT 1
+      `);
+
+      const id_jugador = resultado[0].id_jugador;
+
+    await realizarQuery(`INSERT INTO Cartas
+      (id_jugador, estatura, peso, overall, ritmo, tiro, pase, defensa, regate, fisico)
+      VALUES (
+        ${id_jugador},
+        ${req.body.estatura},
+        ${req.body.peso},
+        ${req.body.overall},
+        ${req.body.ritmo},
+        ${req.body.tiro},
+        ${req.body.pase},
+        ${req.body.defensa},
+        ${req.body.regate},
+        ${req.body.fisico}
+      )`);
+
+    res.send({message: "añadido correctamente"});
   } catch(error) {
     res.send(error.message);
   }

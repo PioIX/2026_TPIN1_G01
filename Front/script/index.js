@@ -91,17 +91,26 @@ async function handleRegister() {
     register(datos)
 }
 
-function agregarFutbolista() {
+async function agregarFutbolista() {
   let datos = {
     url_foto:add_imagen(),
     nombre:add_nombre(),
-    club:add_club(),
-    id_club:add_id_club(),
-    id_pais:add_id_pais(),
-    pais:add_pais(),
+    liga:  add_liga(),
+    id_liga: await add_id_liga(),
+    id_pais:await add_id_pais(),
+    pais: add_pais(),
     posicion:add_posicion(),
-
+    estatura:  add_estatura(),
+    peso:      add_peso(),
+    overall:   add_overall(),
+    ritmo:     add_ritmo(),
+    tiro:      add_tiro(),
+    pase:      add_pase(),
+    defensa:   add_defensa(),
+    regate:    add_regate(),
+    fisico:    add_fisico()
   };
+  console.log(datos)
   envioPost(datos);
 }
 
@@ -113,4 +122,7 @@ async function envioPost(datos) {
       body:    JSON.stringify(datos)
   });
 }
+
+
+
 

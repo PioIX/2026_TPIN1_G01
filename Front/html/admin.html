@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin 🎮 FIFALICHI HoL</title>
     <link rel="stylesheet" href="../style/style.css">
-    <link rel="stylesheet" href="../style/admin.css">
     <link rel="icon" href="../images/icono/logo_FIFALICHI.ico">
 </head>
 <body>
@@ -33,7 +32,7 @@
 
             <!-- AGREGAR -->
             <div class="admin-card card-agregar">
-                <h3><span class="icon">+</span>AGREGAR FUTBOLISTA</h3>
+    			<h3><span class="icon">+</span>AGREGAR FUTBOLISTA</h3>
                 <input type="text" id="add-nombre" placeholder="NOMBRE">
 				<select id="add-pais" name="pais" aria-placeholder="nacionalidad">
 					<option value="Afganistán">Afganistán</option>
@@ -215,7 +214,7 @@
 					<option value="Zambia">Zambia</option>
 					<option value="Zimbabue">Zimbabue</option>
 				</select>
-                <select id="add-pais" name="posicion" aria-placeholder="nacionalidad">
+                <select id="add-posicion" name="posicion" aria-placeholder="nacionalidad">
 					<option value="1">Arquero</option>
 					<option value="2">Defensa</option>
 					<option value="3">Medicampista</option>
@@ -223,6 +222,20 @@
 				</select>
                 <input type="text" id="add-liga" placeholder="LIGA ACTUAL">
                 <input type="text" id="add-imagen" placeholder="URL DE IMAGEN">
+
+				<div class="fields-divider"></div>
+    			<p class="stats-label">ESTADÍSTICAS</p>
+				<div class="edit-fields-grid">
+					<input type="number" id="add-estatura" placeholder="ESTATURA (cm)" min="140" max="220">
+					<input type="number" id="add-peso"     placeholder="PESO (kg)"     min="50"  max="120">
+					<input type="number" id="add-overall"  placeholder="OVERALL"       min="1"   max="99">
+					<input type="number" id="add-ritmo"    placeholder="RITMO"         min="1"   max="99">
+					<input type="number" id="add-tiro"     placeholder="TIRO"          min="1"   max="99">
+					<input type="number" id="add-pase"     placeholder="PASE"          min="1"   max="99">
+					<input type="number" id="add-defensa"  placeholder="DEFENSA"       min="1"   max="99">
+					<input type="number" id="add-regate"   placeholder="REGATE"        min="1"   max="99">
+					<input type="number" id="add-fisico"   placeholder="FÍSICO"        min="1"   max="99">
+				</div>
                 <button class="btn-admin btn-agregar" onclick="agregarFutbolista()">AGREGAR</button>
             </div>
 
