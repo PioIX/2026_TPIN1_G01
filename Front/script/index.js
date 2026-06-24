@@ -91,9 +91,4 @@ async function handleRegister() {
     register(datos)
 }
 
-function agregarImagenes(img1,img2,name1,name2){
-    document.getElementById("img_player1").src = img1;
-    document.getElementById("name1").innerHTML = name1
-    document.getElementById("img_player2").src = img2;
-    document.getElementById("name2").innerHTML = name2
-}
+
