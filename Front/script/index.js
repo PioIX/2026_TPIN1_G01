@@ -1,4 +1,18 @@
-let user= localStorage.getItem("usuario")
+let user;
+user = JSON.parse(localStorage.getItem("usuarios"));
+
+async function llamadoUsuarios() {
+    const response = await fetch('http://localhost:4000/usuarios',{
+        method:"GET", 
+        headers: {
+            "Content-Type": "application/json",
+          },
+    })
+
+    let result = await response.json();
+    return result
+}
+
 async function llamadoJugadores(filtro){
     let response;
     if (filtro==undefined){
@@ -39,9 +53,9 @@ async function id_pais() {
 async function login(mail,contraseña){
 
     const usuarios= await llamadoUsuarios();
-    console.log(usuarios)
     for (let usuario of usuarios){
         if (usuario.contrasena==contraseña && usuario.mail==mail){
+            localStorage.setItem("usuarios", JSON.stringify(usuario));
             return usuario
         }
     }
@@ -54,14 +68,11 @@ async function handleLogin(){
     usuario= await login(mail,contrasena)
     if(usuario){
         window.location.href = "menu.html";
-        localStorage.setItem("usuario", json.stringify(usuairo))
         return
     }
 }
 
 async function register(datos){
-
-
     const response = await fetch('http://localhost:4000/usuarios',{
             method:"POST", //GET, POST, PUT o DELETE
             headers: {
