@@ -1,3 +1,4 @@
+let user= localStorage.getItem("usuario")
 async function llamadoJugadores(filtro){
     let response;
     if (filtro==undefined){
@@ -11,7 +12,7 @@ async function llamadoJugadores(filtro){
     })
     }else{
 
-        response = await fetch(`http://localhost:4000/jugadores? ${filtro}`,{
+        response = await fetch(`http://localhost:4000/jugadores?categoria=${filtro[0]}&filtro=${[filtro[1]]}`,{
         method:"GET", 
         headers: {
             "Content-Type": "application/json",
@@ -41,7 +42,7 @@ async function login(mail,contraseña){
     console.log(usuarios)
     for (let usuario of usuarios){
         if (usuario.contrasena==contraseña && usuario.mail==mail){
-            return true
+            return usuario
         }
     }
     return false
@@ -50,9 +51,10 @@ async function login(mail,contraseña){
 async function handleLogin(){
     const mail=getMail()
     const contrasena=getContraseña()
-
-    if(await login(mail,contrasena)){
+    usuario= await login(mail,contrasena)
+    if(usuario){
         window.location.href = "menu.html";
+        localStorage.setItem("usuario", json.stringify(usuairo))
         return
     }
 }
@@ -113,4 +115,3 @@ async function envioPost(datos) {
       body:    JSON.stringify(datos)
   });
 }
-
