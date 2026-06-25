@@ -173,9 +173,9 @@ app.post("/jugadores", async function(req, res) {
 app.delete("/jugadores", async function(req, res) {
   try {
     await realizarQuery(
-      `DELETE FROM Jugadores
-       WHERE id_jugador=${req.body.id}`
+      `DELETE FROM Jugadores WHERE id_jugador=${req.body.id}`
     );
+    res.send({ message: "eliminado correctamente" });
   } catch(error) {
     res.send(error.message);
   }
@@ -185,16 +185,30 @@ app.delete("/jugadores", async function(req, res) {
 app.put("/jugadores", async function(req, res) {
   try {
     await realizarQuery(
-      `UPDATE Jugadores SET
+        `UPDATE Jugadores SET
         url_foto="${req.body.url_foto}",
         nombre="${req.body.nombre}",
         id_liga=${req.body.id_liga},
         liga="${req.body.liga}",
         pais="${req.body.pais}",
-        id_region=${req.body.id_region},
+        id_pais=${req.body.id_pais},
         posicion=${req.body.posicion}
-       WHERE id_jugador=${req.body.id}`
+        WHERE id_jugador=${req.body.id}`
     );
+    await realizarQuery(
+      `UPDATE Cartas SET
+        estatura=${req.body.estatura},
+        peso=${req.body.peso},
+        overall=${req.body.overall},
+        ritmo=${req.body.ritmo},
+        tiro=${req.body.tiro},
+        pase=${req.body.pase},
+        defensa=${req.body.defensa},
+        regate=${req.body.regate},
+        fisico=${req.body.fisico}
+        WHERE id_jugador=${req.body.id}`
+    );
+    res.send({ message: "actualizado correctamente" });
   } catch(error) {
     res.send(error.message);
   }

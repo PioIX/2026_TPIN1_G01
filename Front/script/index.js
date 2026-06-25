@@ -1,8 +1,6 @@
 async function llamadoJugadores(filtro){
     let response;
     if (filtro==undefined){
-
-
         response = await fetch('http://localhost:4000/jugadores',{
         method:"GET", 
         headers: {
@@ -36,7 +34,6 @@ async function id_pais() {
 
 
 async function login(mail,contraseña){
-
     const usuarios= await llamadoUsuarios();
     console.log(usuarios)
     for (let usuario of usuarios){
@@ -58,14 +55,12 @@ async function handleLogin(){
 }
 
 async function register(datos){
-
-
     const response = await fetch('http://localhost:4000/usuarios',{
-            method:"POST", //GET, POST, PUT o DELETE
+            method:"POST",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(datos) //JSON.stringify convierte de objeto a JSON
+            body: JSON.stringify(datos)
         })
         if(await login(datos.mail,datos.contrasena)){
         window.location.href = "menu.html";
@@ -123,6 +118,14 @@ async function envioPost(datos) {
   });
 }
 
+async function eliminarFutbolista() {
+  const id = document.getElementById("del-id").value;
+  if (!id) { alert("Ingresá un ID"); return; }
 
-
-
+  await fetch('http://localhost:4000/jugadores', {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ id: id })
+  });
+  alert("Futbolista eliminado");
+}
