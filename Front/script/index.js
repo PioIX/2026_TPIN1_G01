@@ -126,3 +126,25 @@ async function envioPost(datos) {
       body:    JSON.stringify(datos)
   });
 }
+
+async function selectFilter(filtro) {
+    let opciones;
+    document.getElementById("select-container").innerHTML = `<select class="filter-select" id="filterSelect">`;
+    if (filtro == "posicion") {
+        valores=[2,3,4]
+        opciones = ["Defensa", "Mediocampista", "Delantero"];
+        for (let i = 0; i < opciones.length; i++) {
+            document.getElementById("filterSelect").innerHTML += `<option value="${valores[i]}">${opciones[i]}</option>`;
+        }
+    }else{
+        const response = await fetch(`http://localhost:4000/filtro?categoria=${filtro}`, {
+            method: "GET",
+            headers: { "Content-Type": "application/json", },
+        });
+        opciones = await response.json();
+        opciones = opciones.map(opcion => opcion[filtro]);
+        document.getElementById("filterSelect").innerHTML = opciones.map(opcion => `<option value="${opcion}">${opcion}</option>`).join('');
+    }
+    
+    
+}

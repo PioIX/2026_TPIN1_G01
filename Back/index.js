@@ -173,3 +173,12 @@ app.put("/jugadores", async function(req, res) {
   }
 });
 
+app.get("/filtro", async function(req, res) {
+  try {
+    result = await realizarQuery(`SELECT ${req.query.categoria} FROM Jugadores GROUP BY ${req.query.categoria} ORDER BY COUNT(${req.query.categoria}) DESC LIMIT 10`);
+    res.send(result);
+
+  } catch (error) {
+    res.send({ error: error.message });
+  }
+})
