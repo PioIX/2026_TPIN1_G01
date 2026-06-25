@@ -15,7 +15,7 @@ async function llamadoUsuarios() {
 
 async function llamadoJugadores(filtro){
     let response;
-    if (filtro==undefined){
+    if (filtro==null){
 
 
         response = await fetch('http://localhost:4000/jugadores',{
@@ -144,7 +144,16 @@ async function selectFilter(filtro) {
         opciones = await response.json();
         opciones = opciones.map(opcion => opcion[filtro]);
         document.getElementById("filterSelect").innerHTML = opciones.map(opcion => `<option value="${opcion}">${opcion}</option>`).join('');
-    }
-    
-    
+        
+    } 
+    document.getElementById("select-container").innerHTML +=`
+	<button id="aceptarFiltro" onclick="AceptarFiltro('${filtro}')">Aceptar</button>`
 }
+
+    function AceptarFiltro(caracteristica){
+        const valor=document.getElementById("filterSelect").value
+        localStorage.setItem("filtro", JSON.stringify([caracteristica,valor]));
+    }
+    function LimpiarFiltro(){
+        localStorage.removeItem("filtro");
+    }

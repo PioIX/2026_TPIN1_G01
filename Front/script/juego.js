@@ -1,13 +1,15 @@
 let puntaje=0;
 let jugadores;
 let modo;
+let filtro=JSON.parse(localStorage.getItem("filtro"))
+
 
 function esperar(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 async function cargarJugadores() {
-    jugadores = await llamadoJugadores();
+    jugadores = await llamadoJugadores(filtro);
 }
 
 function select_estadistica(){
