@@ -86,38 +86,6 @@ async function handleRegister() {
     register(datos)
 }
 
-async function agregarFutbolista() {
-  let datos = {
-    url_foto:add_imagen(),
-    nombre:add_nombre(),
-    liga:  add_liga(),
-    id_liga: await add_id_liga(),
-    id_pais:await add_id_pais(),
-    pais: add_pais(),
-    posicion:add_posicion(),
-    estatura:  add_estatura(),
-    peso:      add_peso(),
-    overall:   add_overall(),
-    ritmo:     add_ritmo(),
-    tiro:      add_tiro(),
-    pase:      add_pase(),
-    defensa:   add_defensa(),
-    regate:    add_regate(),
-    fisico:    add_fisico()
-  };
-  console.log(datos)
-  envioPost(datos);
-}
-
-async function envioPost(datos) {
-  await fetch(
-    'http://localhost:4000/jugadores', {
-      method:  "POST",
-      headers: { "Content-Type": "application/json" },
-      body:    JSON.stringify(datos)
-  });
-}
-
 async function eliminarFutbolista() {
   const id = document.getElementById("del-id").value;
   if (!id) { alert("Ingresá un ID"); return; }
@@ -128,4 +96,124 @@ async function eliminarFutbolista() {
     body: JSON.stringify({ id: id })
   });
   alert("Futbolista eliminado");
+}
+
+
+let modo = "crear";
+let idEditar = null;
+
+function seleccionarModo(boton){
+
+
+
+    console.log(boton);
+    console.log(boton.value);
+
+    modo = boton.value;
+
+    console.log(modo);
+
+
+    const btnCrear = document.getElementById("btn-modo-crear");
+    const btnEditar = document.getElementById("btn-modo-editar");
+
+    // Quita el active de ambos
+    btnCrear.classList.remove("active");
+    btnEditar.classList.remove("active");
+
+    // Activa el botón seleccionado
+    boton.classList.add("active");
+
+    if(modo == "editar"){
+
+        idEditar = prompt("Ingrese el ID del futbolista a editar:");
+
+        // Si cancela o deja vacío vuelve a Crear
+        if(idEditar == null || idEditar.trim() == ""){
+
+            modo = "crear";
+            idEditar = null;
+
+            btnEditar.classList.remove("active");
+            btnCrear.classList.add("active");
+
+            return;
+        }
+
+        idEditar = Number(idEditar);
+
+    }else{
+
+        idEditar = null;
+
+    }
+
+}
+
+async function guardarJugador(){
+
+    if(modo == "crear"){
+
+        await fetch("http://localhost:4000/jugadores",{
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify({
+                url_foto: add_imagen(),
+                nombre: add_nombre(),
+                id_liga: await add_id_liga(),
+                liga: add_liga(),
+                pais: add_pais(),
+                id_pais: await add_id_pais(),
+                posicion: add_posicion(),
+
+                estatura: add_estatura(),
+                peso: add_peso(),
+                overall: add_overall(),
+                ritmo: add_ritmo(),
+                tiro: add_tiro(),
+                pase: add_pase(),
+                defensa: add_defensa(),
+                regate: add_regate(),
+                fisico: add_fisico()
+            })
+        });
+
+        alert("Jugador creado correctamente.");
+
+    }else{
+
+        await fetch("http://localhost:4000/jugadores",{
+            method:"PUT",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify({
+                id: idEditar,
+
+                url_foto: add_imagen(),
+                nombre: add_nombre(),
+                id_liga: await add_id_liga(),
+                liga: add_liga(),
+                pais: add_pais(),
+                id_pais: await add_id_pais(),
+                posicion: add_posicion(),
+
+                estatura: add_estatura(),
+                peso: add_peso(),
+                overall: add_overall(),
+                ritmo: add_ritmo(),
+                tiro: add_tiro(),
+                pase: add_pase(),
+                defensa: add_defensa(),
+                regate: add_regate(),
+                fisico: add_fisico()
+            })
+        });
+
+        alert("Jugador editado correctamente.");
+
+    }
+
 }

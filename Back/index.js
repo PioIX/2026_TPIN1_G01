@@ -173,6 +173,16 @@ app.post("/jugadores", async function(req, res) {
 app.delete("/jugadores", async function(req, res) {
   try {
     await realizarQuery(
+      `DELETE FROM Cartas WHERE id_jugador=${req.body.id}`
+    );
+  } catch(error) {
+    res.send(error.message);
+  }
+});
+
+app.delete("/jugadores", async function(req, res) {
+  try {
+    await realizarQuery(
       `DELETE FROM Jugadores WHERE id_jugador=${req.body.id}`
     );
     res.send({ message: "eliminado correctamente" });
