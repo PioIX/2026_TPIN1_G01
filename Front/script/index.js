@@ -151,9 +151,19 @@ async function selectFilter(filtro) {
 }
 
     function AceptarFiltro(caracteristica){
-        const valor=document.getElementById("filterSelect").value
+        const valor=document.getElementById("filterSelect").value;
         localStorage.setItem("filtro", JSON.stringify([caracteristica,valor]));
     }
     function LimpiarFiltro(){
         localStorage.removeItem("filtro");
     }
+
+function aceptarModo(){
+    const valor=document.getElementById("select-modo").value;
+        localStorage.setItem("modo", JSON.stringify(valor));
+}
+
+function LimpiarModo(){
+    localStorage.removeItem("modo");
+}
+
