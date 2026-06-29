@@ -1,19 +1,21 @@
 let puntaje=0;
 let jugadores;
-let modo;
+let modo=JSON.parse(localStorage.getItem("modo"))
+let filtro=JSON.parse(localStorage.getItem("filtro"))
+
 
 function esperar(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 async function cargarJugadores() {
-    jugadores = await llamadoJugadores();
+    jugadores = await llamadoJugadores(filtro);
 }
 
-function select_estadistica(){
+function select_estadistica(modo){
     const estadisticas = ["ritmo", "tiro", "pase", "regate", "defensa", "fisico"];
     
-    if (modo === undefined) {
+    if (modo === null) {
         return estadisticas[Math.floor(Math.random() * estadisticas.length)];
     }
     
@@ -68,23 +70,23 @@ async function juego(){
         console.log(jugadores)
         for (let i=1;i<jugadores.length;i++){
             if (primero){
-                jugador1=[jugadores[0],select_estadistica()];
+                jugador1=[jugadores[0],select_estadistica(modo)];
             }else{
                 jugador1=jugador2
             }
-            jugador2=[jugadores[i],select_estadistica()];
+            jugador2=[jugadores[i],select_estadistica(modo)];
             agregarImagenes(jugador1,jugador2)
             if (!primero){
                 document.getElementById("stat1").innerHTML += `: ${jugador1[0][jugador1[1]]}`;
             }
-
+            /* para mostrar en consola los valores asi ganar facil
             console.clear()
             console.log("jug1:")
             console.log(jugador1[0].nombre)
             console.log(`${jugador1[1]}: ${jugador1[0][jugador1[1]]}`)
             console.log("jug2:")
             console.log(jugador2[0].nombre)
-            console.log(`${jugador2[1]}: ${jugador2[0][jugador2[1]]}`)  
+            console.log(`${jugador2[1]}: ${jugador2[0][jugador2[1]]}`)*/
 
             const eleccion = await esperarEleccion();
 
@@ -99,7 +101,6 @@ async function juego(){
                 break;
             }
             document.getElementById("txt-msj").innerHTML="bien hecho";
-
             await esperar(3000)
             document.getElementById("txt-msj").innerHTML="";
             primero=false

@@ -34,7 +34,7 @@ app.get("/jugadores", async function (req, res) {
             result = await realizarQuery(`SELECT url_foto,nombre,id_liga,liga,id_pais,pais,posicion,Cartas.* FROM Jugadores INNER JOIN Cartas ON Cartas.id_jugador = Jugadores.id_jugador ORDER BY RAND() LIMIT 100`)
         } else {
 
-            result = await realizarQuery(`SELECT url_foto,nombre,id_liga,liga,id_pais,pais,posicion,Cartas.* FROM Jugadores INNER JOIN Cartas ON Cartas.id_jugador = Jugadores.id_jugador WHERE ${req.query.categoria}=${req.query.filtro} ORDER BY RAND() LIMIT 100`)
+            result = await realizarQuery(`SELECT url_foto,nombre,id_liga,liga,id_pais,pais,posicion,Cartas.* FROM Jugadores INNER JOIN Cartas ON Cartas.id_jugador = Jugadores.id_jugador WHERE ${req.query.categoria}="${req.query.filtro}" ORDER BY RAND() LIMIT 100`)
         }
 
         res.send(result)
@@ -173,3 +173,12 @@ app.put("/jugadores", async function(req, res) {
   }
 });
 
+app.get("/filtro", async function(req, res) {
+  try {
+    result = await realizarQuery(`SELECT ${req.query.categoria} FROM Jugadores GROUP BY ${req.query.categoria} ORDER BY COUNT(${req.query.categoria}) DESC LIMIT 10`);
+    res.send(result);
+
+  } catch (error) {
+    res.send({ error: error.message });
+  }
+})

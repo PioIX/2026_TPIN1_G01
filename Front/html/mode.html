@@ -19,12 +19,24 @@
 		</div>
 	</header>
 	<main class="main-modo">
-		
+		<select name="modo" id="select-modo">
+			<option value="tiro">Tiro</option>
+			<option value="pase">Pase</option>
+			<option value="ritmo">Ritmo</option>
+			<option value="fisico">Fisico</option>
+			<option value="defensa">Defensa</option>
+			<option value="regate">Regate</option>
+			<option value="estatura">Altura</option>
+			<option value="peso">Peso</option>
+		</select>
+		<button id="btn-modo" onclick="aceptarModo()">Aceptar</button>
+		<button id="limpiar-modo" onclick="limpiarModo()">Limpiar</button>
 	</main>
 	
 	<footer>
 		<hr>
 		<h4>pagina oficial de FIFALICHI © | <strong>FIFALICHI</strong> <b class="h_green">H</b>o<b class="l_red">L</b> | Borda, Garcea, Piscolichi y Rey</h4>
 	</footer>
+	<script src="../script/index.js"></script>
 </body>
 </html>

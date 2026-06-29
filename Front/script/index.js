@@ -15,7 +15,7 @@ async function llamadoUsuarios() {
 
 async function llamadoJugadores(filtro){
     let response;
-    if (filtro==undefined){
+    if (filtro==null){
 
 
         response = await fetch('http://localhost:4000/jugadores',{
@@ -126,3 +126,44 @@ async function envioPost(datos) {
       body:    JSON.stringify(datos)
   });
 }
+
+async function selectFilter(filtro) {
+    let opciones;
+    document.getElementById("select-container").innerHTML = `<select class="filter-select" id="filterSelect">`;
+    if (filtro == "posicion") {
+        valores=[2,3,4]
+        opciones = ["Defensa", "Mediocampista", "Delantero"];
+        for (let i = 0; i < opciones.length; i++) {
+            document.getElementById("filterSelect").innerHTML += `<option value="${valores[i]}">${opciones[i]}</option>`;
+        }
+    }else{
+        const response = await fetch(`http://localhost:4000/filtro?categoria=${filtro}`, {
+            method: "GET",
+            headers: { "Content-Type": "application/json", },
+        });
+        opciones = await response.json();
+        opciones = opciones.map(opcion => opcion[filtro]);
+        document.getElementById("filterSelect").innerHTML = opciones.map(opcion => `<option value="${opcion}">${opcion}</option>`).join('');
+        
+    } 
+    document.getElementById("select-container").innerHTML +=`
+	<button id="aceptarFiltro" onclick="AceptarFiltro('${filtro}')">Aceptar</button>`
+}
+
+    function AceptarFiltro(caracteristica){
+        const valor=document.getElementById("filterSelect").value;
+        localStorage.setItem("filtro", JSON.stringify([caracteristica,valor]));
+    }
+    function LimpiarFiltro(){
+        localStorage.removeItem("filtro");
+    }
+
+function aceptarModo(){
+    const valor=document.getElementById("select-modo").value;
+        localStorage.setItem("modo", JSON.stringify(valor));
+}
+
+function LimpiarModo(){
+    localStorage.removeItem("modo");
+}
+
