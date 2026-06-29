@@ -182,3 +182,30 @@ app.get("/filtro", async function(req, res) {
     res.send({ error: error.message });
   }
 })
+
+app.post("/puntaje", async function(req, res) {
+  try {
+    await realizarQuery(`INSERT INTO Partidas
+       (puntajes,fecha,id_usuario)
+       VALUES (
+        ${req.body.puntaje},
+        "${req.body.fecha}",
+        ${req.body.id_usuario}
+        )`);
+    res.send("añadido correctamente");
+  } catch(error) {
+    res.send(error.message);
+  }
+});
+
+app.get('/puntaje', async function (req, res) {
+    try {
+ 
+        let respuesta = await realizarQuery(`SELECT * FROM Partidas`);
+        res.send(respuesta);
+    }
+
+    catch (error) {
+        res.status(500).send({ error: error.message });
+    }
+})

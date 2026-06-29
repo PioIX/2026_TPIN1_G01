@@ -73,7 +73,7 @@ async function handleLogin(){
 }
 
 async function register(datos){
-    const response = await fetch('http://localhost:4000/usuarios',{
+    await fetch('http://localhost:4000/usuarios',{
             method:"POST", //GET, POST, PUT o DELETE
             headers: {
                 "Content-Type": "application/json",
