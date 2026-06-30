@@ -167,3 +167,54 @@ function LimpiarModo(){
     localStorage.removeItem("modo");
 }
 
+
+
+function mostrarTabla(usuario,tiempo){
+    async function llamarPuntajes(){
+    let query=`http://localhost:4000/puntaje?`
+    let condiciones=[];
+
+    if (user!=undefined){
+        condiciones.push(`user=${usuario}`)
+    }
+    if (tiempo!==undefined){
+        condiciones.push("tiempo=1")
+    }
+    if (condiciones.length > 0) {
+         query +=condiciones.join("&");
+    }
+    const response = await fetch(query,{
+        method:"GET", 
+        headers: {
+            "Content-Type": "application/json",
+          },
+    })
+
+    let result = await response.json();
+    return result
+}
+    const puntajes=llamarPuntajes(usuario,tiempo)
+    let tabla=getTabla()
+    tabla.innerHTML=`<thead>
+				<tr>
+					<th>N</th>
+					<th>Usuario</th>
+					<th>Puntaje</th>
+					<th>Fecha</th>
+				</tr>
+			</thead>`
+    for (let i=0;i<puntajes.length;i++){
+
+        if (puntajes[i].id_usuario==user.id_usuario){
+            tabla.innerHTML+="<tr class=propio>"
+        }else{
+            tabla.innerHTML+="<tr>"
+        }
+        tabla.innerHTML+=`
+				<td>${i+1}</td>
+				<td>${puntajes[i].nombre}</td>
+				<td>${puntajes[i].puntajes}</td>
+				<td>${puntajes[i].fecha}</td>
+			</tr>`
+    }
+}
