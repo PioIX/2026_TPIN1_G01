@@ -145,6 +145,9 @@ async function envioPost(datos) {
 }
 
 async function selectFilter(filtro) {
+    document.querySelectorAll(".filter-btn").forEach(btn => btn.classList.remove("active"));
+    event.target.classList.add("active");
+
     let opciones;
     document.getElementById("select-container").innerHTML = `<select class="filter-select" id="filterSelect">`;
     if (filtro == "posicion") {
