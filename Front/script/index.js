@@ -1,6 +1,6 @@
 let user;
 user = JSON.parse(localStorage.getItem("usuarios"));
-
+let caracteristicaTabla = [-1,-1];
 async function llamadoUsuarios() {
     const response = await fetch('http://localhost:4000/usuarios',{
         method:"GET", 
@@ -91,7 +91,6 @@ async function handleRegister() {
     const u_contraseña=getContraseña();
     const u_nombre=getNombre();
 
-    console.log(u_mail,u_contraseña,u_nombre)
     if (u_mail=="" || u_contraseña=="" || u_nombre==""){
         alert("Rellene todos los campos")
         return
@@ -169,15 +168,15 @@ function LimpiarModo(){
 
 
 
-function mostrarTabla(usuario,tiempo){
+async function mostrarTabla(){
+
     async function llamarPuntajes(){
     let query=`http://localhost:4000/puntaje?`
     let condiciones=[];
-
-    if (user!=undefined){
-        condiciones.push(`user=${usuario}`)
+    if (caracteristicaTabla[0] !== -1){
+        condiciones.push(`user=${caracteristicaTabla[0]}`)
     }
-    if (tiempo!==undefined){
+    if (caracteristicaTabla[1] !== -1){
         condiciones.push("tiempo=1")
     }
     if (condiciones.length > 0) {
@@ -193,7 +192,7 @@ function mostrarTabla(usuario,tiempo){
     let result = await response.json();
     return result
 }
-    const puntajes=llamarPuntajes(usuario,tiempo)
+    const puntajes= await llamarPuntajes()
     let tabla=getTabla()
     tabla.innerHTML=`<thead>
 				<tr>
@@ -212,9 +211,26 @@ function mostrarTabla(usuario,tiempo){
         }
         tabla.innerHTML+=`
 				<td>${i+1}</td>
-				<td>${puntajes[i].nombre}</td>
+				<td>${puntajes[i].nombre_usuario}</td>
 				<td>${puntajes[i].puntajes}</td>
-				<td>${puntajes[i].fecha}</td>
+				<td>${puntajes[i].fecha.slice(0, 10)}</td>
 			</tr>`
     }
+}
+
+function tablaPersonal(){
+    caracteristicaTabla[0]=user.id_usuario
+    mostrarTabla(caracteristicaTabla)
+}
+function tablaMes(){
+    caracteristicaTabla[1]=1
+    mostrarTabla(caracteristicaTabla)
+}
+function tablaTodos(){
+    caracteristicaTabla[0]=-1
+    mostrarTabla(caracteristicaTabla)
+}
+function tablahistorica(){
+    caracteristicaTabla[1]=-1
+    mostrarTabla(caracteristicaTabla)
 }
