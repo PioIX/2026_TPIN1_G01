@@ -21,7 +21,7 @@
 	<main class="main-menu">
         <div class="menu-botones">
             <div class="fila-jugar">
-                <button class="btn-info">i</button>
+                <button class="btn-info" onclick="document.getElementById('instrucciones').style.display='block'">i</button>
                 <a class="btn btn-jugar" href="game.html">JUGAR</a>
             </div>
 			<br>
@@ -37,6 +37,13 @@
         <div class="menu-logo">
             <img src="../images/logo_FIFALICHI.png" alt="Logo FIFALICHI">
         </div>
+		<div id="instrucciones" class="modal">
+  <div class="modal-contenido">
+    <span class="cerrar" onclick="document.getElementById('instrucciones').style.display='none'">&times;</span>
+    <h2>¡Hola!</h2>
+    <p>Este es el contenido de la ventana emergente.</p>
+  </div>
+</div>
     </main>
 	
 	<footer>
