@@ -21,7 +21,7 @@ body::before {
     pointer-events: none;
 }
 
-/* ---------- HEADER ---------- */
+/*HEADER*/
 header {
     position: relative;
     width: 100%;
@@ -74,7 +74,7 @@ header h1 {
     width: auto;
 }
 
-/* ---------- FOOTER ---------- */
+/* FOOTER */
 footer {
     position: fixed;
     bottom: 0;
@@ -97,19 +97,23 @@ footer h4 {
     font-size: 0.7rem;
 }
 
-/* ---------- COLORES ---------- */
-.h_green, .higher_green { color: rgb(0, 255, 42); }
-.l_red,   .lower_red   { color: rgb(255, 0, 0); }
+/* COLORES */
+.h_green, .higher_green{ 
+    color: rgb(0, 255, 42); 
+}
+.l_red,   .lower_red{ 
+    color: rgb(255, 0, 0); 
+}
 
-/* ---------- MAIN BASE ---------- */
+/* MAIN BASE  */
 main {
     position: relative;
     z-index: 1;
     min-height: calc(100vh - 60px);
-    padding-bottom: 60px; /* espacio para el footer fijo */
+    padding-bottom: 60px; 
 }
 
-/* ---------- MAIN MENU (menu.html) ---------- */
+/*  MAIN MENU (menu.html) */
 main.main-menu {
     display: flex;
     align-items: center;
@@ -119,7 +123,7 @@ main.main-menu {
     margin-left: 15rem;
 }
 
-/* ---------- MAIN LOGIN (login.html) ---------- */
+/*  MAIN LOGIN (login.html)  */
 main.main-login {
     display: flex;
     align-items: center;
@@ -127,7 +131,7 @@ main.main-login {
     padding: 2rem 1rem 60px 1rem;
 }
 
-/* ---------- MAIN GAME (game.html) ---------- */
+/* MAIN GAME (game.html) */
 main.main-game {
     display: flex;
     align-items: center;
@@ -135,7 +139,7 @@ main.main-game {
     padding: 2rem 2rem 60px 2rem;
 }
 
-/* ---------- MAIN FILTROS (filters.html) ---------- */
+/* MAIN FILTROS (filters.html) */
 main.main-filtros {
     display: flex;
     flex-direction: column;
@@ -144,7 +148,7 @@ main.main-filtros {
     gap: 1rem;
 }
 
-/* ---------- MAIN MODO (mode.html) ---------- */
+/* MAIN MODO (mode.html) */
 main.main-modo {
     display: flex;
     flex-direction: column;
@@ -154,7 +158,7 @@ main.main-modo {
     gap: 1rem;
 }
 
-/* ---------- MAIN PUNTAJE (points.html) ---------- */
+/* MAIN PUNTAJE (points.html) */
 main.main-puntaje {
     display: flex;
     flex-direction: column;
@@ -163,7 +167,7 @@ main.main-puntaje {
     gap: 1rem;
 }
 
-/* ---------- BOTONES ---------- */
+/* BOTONES */
 .btn {
     display: block;
     width: 100%;
@@ -221,7 +225,20 @@ main.main-puntaje {
     box-shadow: 0 0 26px rgba(231, 76, 60, 0.65);
 }
 
-/* ---------- INPUTS ---------- */
+
+.volver-container {
+    position: fixed;
+    bottom: 90px;
+    left: 30px;   
+    z-index: 1001;
+}
+
+.volver-container .btn {
+    width: 200px;
+}
+
+
+/*INPUTS*/
 input[type="text"],
 input[type="email"],
 input[type="password"],
@@ -302,16 +319,26 @@ main.main-admin {
     font-size: 1rem;
 }
 
-.card-eliminar h3       { border-color: rgba(231, 76, 60, 0.4); }
-.card-eliminar h3 .icon { color: #e74c3c; }
+.card-eliminar h3{ 
+    border-color: rgba(231, 76, 60, 0.4); 
+}
+.card-eliminar h3 .icon{ 
+    color: #e74c3c; 
+}
 
-.card-agregar h3        { border-color: rgba(46, 204, 64, 0.4); }
+.card-agregar h3{
+    border-color: rgba(46, 204, 64, 0.4);
+}
 .card-agregar h3 .icon  { color: #2ecc40; }
 
-.card-editar h3         { border-color: rgba(52, 152, 219, 0.4); }
-.card-editar h3 .icon   { color: #3498db; }
+.card-editar h3{ 
+    border-color: rgba(52, 152, 219, 0.4); 
+}
+.card-editar h3 .icon{ 
+    color: #3498db; 
+}
 
-/* ---------- INPUTS DENTRO DE CARDS ---------- */
+/* INPUTS DENTRO DE CARDS  */
 .admin-card input[type="text"],
 .admin-card input[type="number"],
 .admin-card select {
@@ -362,7 +389,7 @@ main.main-admin {
 .btn-agregar:hover  { box-shadow: 0 0 26px rgba(46, 204, 64, 0.65); }
 .btn-editar:hover   { box-shadow: 0 0 26px rgba(52, 152, 219, 0.65); }
 
-/* ---------- FILA ID + BUSCAR ---------- */
+/* FILA ID + BUSCAR */
 .edit-id-row {
     display: flex;
     gap: 0.5rem;
@@ -400,7 +427,7 @@ main.main-admin {
     margin: 0.3rem 0;
 }
 
-/* ---------- TOAST ---------- */
+/* TOAST */
 #toast {
     position: fixed;
     bottom: 80px;
@@ -503,7 +530,7 @@ main.main-admin {
     filter: drop-shadow(0 0 30px rgba(0, 255, 60, 0.3));
 }
 
-/* ---------- LOGIN (login.html) ---------- */
+/*LOGIN*/
 .login-container {
     width: 100%;
     max-width: 750px;

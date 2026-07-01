@@ -57,6 +57,15 @@ async function login(mail,contraseña){
         if (usuario.contrasena==contraseña && usuario.mail==mail){
             localStorage.setItem("usuarios", JSON.stringify(usuario));
             return usuario
+        } else if (usuario.contrasena==contraseña && usuario.mail!=mail){
+            alert("Mail incorrecto")
+            return false
+        } else if (usuario.contrasena!=contraseña && usuario.mail==mail){
+            alert("Contraseña incorrecta")
+            return false
+        } else if (usuario.contrasena!=contraseña && usuario.mail!=mail){
+            alert("Mail y contraseña incorrectos, usuario no registrado")
+            return false
         }
     }
     return false
@@ -104,6 +113,12 @@ async function handleRegister() {
     register(datos)
 }
 
+async function logOut(){
+    localStorage.removeItem("usuarios");
+    window.location.href = "index.html";
+}
+
+
 function agregarFutbolista() {
   let datos = {
     url_foto:add_imagen(),
@@ -117,6 +132,8 @@ function agregarFutbolista() {
   };
   envioPost(datos);
 }
+
+
 
 async function envioPost(datos) {
   await fetch(

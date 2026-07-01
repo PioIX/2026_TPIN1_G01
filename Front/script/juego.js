@@ -97,8 +97,10 @@ async function juego(){
             document.getElementById("stat2").innerHTML += `: ${jugador2[0][jugador2[1]]}`;
             if (!correcto) {
                 perder = true;
-                document.getElementById("txt-msj").innerHTML="¡Perdiste en esta comparación!";
-                break;
+                document.getElementById("txt-msj").innerHTML = "¡Perdiste en esta comparación!";
+                await esperar(3000);
+                window.location.href = "../menu.html";
+                return;
             }
             document.getElementById("txt-msj").innerHTML="bien hecho";
             await esperar(3000)
