@@ -1,4 +1,4 @@
-let puntaje=0;
+let puntos=0;
 let jugadores;
 let modo=JSON.parse(localStorage.getItem("modo"))
 let filtro=JSON.parse(localStorage.getItem("filtro"))
@@ -20,6 +20,27 @@ function select_estadistica(modo){
     }
     
     return modo;
+}
+
+async function guardarPuntaje(){
+    await fetch('http://localhost:4000/puntaje',{
+            method:"POST", //GET, POST, PUT o DELETE
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({puntaje:puntos,fecha:new Date().toISOString().split('T')[0],id_usuario:user.id_usuario}) //JSON.stringify convierte de objeto a JSON
+        })
+    window.location.href = "menu.html";
+}
+
+function final(){
+    let elementos = document.getElementsByClassName("player-card");
+    for (let carta of elementos){
+        carta.style.display="none"
+    }
+    document.getElementById("txt-msj").style.display="none"
+    document.getElementById("resultado-panel").hidden = false;
+    document.getElementById("puntaje-txt").innerHTML=puntos
 }
 
 async function juego(){
@@ -67,7 +88,6 @@ async function juego(){
 
     while (!perder){
         await cargarJugadores();
-        console.log(jugadores)
         for (let i=1;i<jugadores.length;i++){
             if (primero){
                 jugador1=[jugadores[0],select_estadistica(modo)];
@@ -101,11 +121,14 @@ async function juego(){
                 break;
             }
             document.getElementById("txt-msj").innerHTML="bien hecho";
-            await esperar(3000)
+            puntos+=1
+            await esperar(2000)
             document.getElementById("txt-msj").innerHTML="";
             primero=false
         }
     }
+    await esperar(3000)
+    final()
 }
 
 juego()

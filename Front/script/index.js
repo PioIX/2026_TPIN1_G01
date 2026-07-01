@@ -1,6 +1,6 @@
 let user;
 user = JSON.parse(localStorage.getItem("usuarios"));
-
+let caracteristicaTabla = [-1,-1];
 async function llamadoUsuarios() {
     const response = await fetch('http://localhost:4000/usuarios',{
         method:"GET", 
@@ -73,7 +73,7 @@ async function handleLogin(){
 }
 
 async function register(datos){
-    const response = await fetch('http://localhost:4000/usuarios',{
+    await fetch('http://localhost:4000/usuarios',{
             method:"POST", //GET, POST, PUT o DELETE
             headers: {
                 "Content-Type": "application/json",
@@ -91,7 +91,6 @@ async function handleRegister() {
     const u_contraseña=getContraseña();
     const u_nombre=getNombre();
 
-    console.log(u_mail,u_contraseña,u_nombre)
     if (u_mail=="" || u_contraseña=="" || u_nombre==""){
         alert("Rellene todos los campos")
         return
@@ -167,3 +166,71 @@ function LimpiarModo(){
     localStorage.removeItem("modo");
 }
 
+
+
+async function mostrarTabla(){
+
+    async function llamarPuntajes(){
+    let query=`http://localhost:4000/puntaje?`
+    let condiciones=[];
+    if (caracteristicaTabla[0] !== -1){
+        condiciones.push(`user=${caracteristicaTabla[0]}`)
+    }
+    if (caracteristicaTabla[1] !== -1){
+        condiciones.push("tiempo=1")
+    }
+    if (condiciones.length > 0) {
+         query +=condiciones.join("&");
+    }
+    const response = await fetch(query,{
+        method:"GET", 
+        headers: {
+            "Content-Type": "application/json",
+          },
+    })
+
+    let result = await response.json();
+    return result
+}
+    const puntajes= await llamarPuntajes()
+    let tabla=getTabla()
+    tabla.innerHTML=`<thead>
+				<tr>
+					<th>N</th>
+					<th>Usuario</th>
+					<th>Puntaje</th>
+					<th>Fecha</th>
+				</tr>
+			</thead>`
+    for (let i=0;i<puntajes.length;i++){
+
+        if (puntajes[i].id_usuario==user.id_usuario){
+            tabla.innerHTML+="<tr class=propio>"
+        }else{
+            tabla.innerHTML+="<tr>"
+        }
+        tabla.innerHTML+=`
+				<td>${i+1}</td>
+				<td>${puntajes[i].nombre_usuario}</td>
+				<td>${puntajes[i].puntajes}</td>
+				<td>${puntajes[i].fecha.slice(0, 10)}</td>
+			</tr>`
+    }
+}
+
+function tablaPersonal(){
+    caracteristicaTabla[0]=user.id_usuario
+    mostrarTabla(caracteristicaTabla)
+}
+function tablaMes(){
+    caracteristicaTabla[1]=1
+    mostrarTabla(caracteristicaTabla)
+}
+function tablaTodos(){
+    caracteristicaTabla[0]=-1
+    mostrarTabla(caracteristicaTabla)
+}
+function tablahistorica(){
+    caracteristicaTabla[1]=-1
+    mostrarTabla(caracteristicaTabla)
+}
