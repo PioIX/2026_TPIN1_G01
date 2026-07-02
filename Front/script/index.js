@@ -119,6 +119,7 @@ async function eliminarFutbolista() {
     method: "DELETE",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ id: id })
+    }); }
 async function logOut(){
     localStorage.removeItem("usuarios");
     window.location.href = "index.html";
@@ -232,7 +233,6 @@ async function guardarJugador(){
                 fisico: add_fisico()
             })
         });
-
         alert("Jugador creado correctamente.");
 
     }else{
@@ -268,7 +268,7 @@ async function guardarJugador(){
         alert("Jugador editado correctamente.");
 
     }
-
+}
 async function selectFilter(filtro) {
     document.querySelectorAll(".filter-btn").forEach(btn => btn.classList.remove("active"));
     event.target.classList.add("active");
