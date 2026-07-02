@@ -65,3 +65,7 @@ function add_imagen(){
 function add_posicion(){
     return document.getElementById("add-posicion").value
 }
+
+function getTabla(){
+    return document.getElementById("tabla")
+}

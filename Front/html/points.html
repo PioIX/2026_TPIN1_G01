@@ -8,7 +8,7 @@
 	<link rel="stylesheet" href="../style/style.css">
     <link rel="icon" href="../images/icono/logo_FIFALICHI.ico">
 </head>
-<body>
+<body onload="mostrarTabla()">
 	<header class="main-header">
 		<div class="header-container">
 			<h1>FIFALICHI</h1>
@@ -19,7 +19,20 @@
 		</div>
 	</header>
 	<main class="main-puntaje">
-		
+		<h1>Tabla de Puntajes</h1>
+		<div id="tabla-botones">
+		<div id="tabla-user">
+			<button onclick="tablaPersonal()">Personal</button>
+			<button onclick="tablaTodos()">Todos</button>
+		</div>
+		<div id="tabla-tiempo">
+			<button onclick="tablaMes()">Este Mes</button>
+			<button onclick="tablahistorica()">Historico</button>
+		</div>
+		</div>
+		<table id="tabla">
+
+		</table>
 	</main>
 	
 	<div class="volver-container">
@@ -32,5 +45,7 @@
 		<hr>
 		<h4>pagina oficial de FIFALICHI © | <strong>FIFALICHI</strong> <b class="h_green">H</b>o<b class="l_red">L</b> | Borda, Garcea, Piscolichi y Rey</h4>
 	</footer>
+	<script src="/Front/script/dom.js"></script>
+	<script src="/Front/script/index.js"></script>
 </body>
 </html>

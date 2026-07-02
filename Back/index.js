@@ -182,3 +182,44 @@ app.get("/filtro", async function(req, res) {
     res.send({ error: error.message });
   }
 })
+
+app.post("/puntaje", async function(req, res) {
+  try {
+    await realizarQuery(`INSERT INTO Partidas
+       (puntajes,fecha,id_usuario)
+       VALUES (
+        ${req.body.puntaje},
+        "${req.body.fecha}",
+        ${req.body.id_usuario}
+        )`);
+    res.send("añadido correctamente");
+  } catch(error) {
+    res.send(error.message);
+  }
+});
+
+app.get('/puntaje', async function (req, res) {
+    try {
+      let query=`SELECT Partidas.id_usuario,Usuarios.nombre_usuario,puntajes,fecha 
+From Partidas 
+inner Join Usuarios on Usuarios.id_usuario=Partidas.id_usuario`
+      let condiciones=[];
+      if (req.query.user !== undefined) {
+            condiciones.push(`Partidas.id_usuario = ${req.query.user}`);
+        }
+
+      if (req.query.tiempo !== undefined) {
+            condiciones.push("fecha >= NOW() - INTERVAL 1 MONTH");
+        }
+
+      if (condiciones.length > 0) {
+            query += " WHERE " + condiciones.join(" AND ");
+        }
+      query += " ORDER BY puntajes DESC";
+        let respuesta = await realizarQuery(query);
+        res.send(respuesta);
+    }
+    catch (error) {
+        res.status(500).send({ error: error.message });
+    }
+})
