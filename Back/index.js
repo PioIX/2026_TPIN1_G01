@@ -31,7 +31,7 @@ app.get("/jugadores", async function (req, res) {
         let result;
         if (req.query.filtro == undefined) {
 
-            result = await realizarQuery(`SELECT url_foto,nombre,id_liga,liga,id_pais,pais,posicion,Cartas.* FROM Jugadores INNER JOIN Cartas ON Cartas.id_jugador = Jugadores.id_jugador ORDER BY RAND() LIMIT 100`)
+            result = await realizarQuery(`SELECT nombre,id_liga,liga,id_pais,pais,posicion,Cartas.* FROM Jugadores INNER JOIN Cartas ON Cartas.id_jugador = Jugadores.id_jugador ORDER BY RAND() LIMIT 100`)
         } else {
 
             result = await realizarQuery(`SELECT url_foto,nombre,id_liga,liga,id_pais,pais,posicion,Cartas.* FROM Jugadores INNER JOIN Cartas ON Cartas.id_jugador = Jugadores.id_jugador WHERE ${req.query.categoria}="${req.query.filtro}" ORDER BY RAND() LIMIT 100`)
@@ -105,7 +105,7 @@ app.post('/login', async function (req, res) {
 app.get("/id_pais", async function(req, res) {
   try {
     const filas = await realizarQuery(
-      `select distinct id_pais from Jugadores WHERE pais=${req.query.pais}`
+      `select distinct id_pais from Jugadores WHERE pais="${req.query.pais}"`
     );
     res.send(filas);
   } catch(error) {
@@ -115,8 +115,9 @@ app.get("/id_pais", async function(req, res) {
 
 app.get("/id_liga", async function(req, res) {
   try {
+    console.log(req.query)
     const filas = await realizarQuery(
-      `select distinct id_liga from Jugadores WHERE liga =${req.query.liga}`
+      `select distinct id_liga from Jugadores WHERE liga ="${req.query.liga}"`
     );
     res.send(filas);
   } catch(error) {
@@ -134,10 +135,36 @@ app.post("/jugadores", async function(req, res) {
         ${req.body.id_liga},
         "${req.body.liga}",
         "${req.body.pais}",
-        ${req.body.id_region},
+        ${req.body.id_pais},
         ${req.body.posicion}
         )`);
-    res.send("añadido correctamente");
+
+      const resultado = await realizarQuery(`
+          SELECT id_jugador
+          FROM Jugadores
+          WHERE nombre = "${req.body.nombre}"
+          ORDER BY id_jugador DESC
+          LIMIT 1
+      `);
+
+      const id_jugador = resultado[0].id_jugador;
+
+    await realizarQuery(`INSERT INTO Cartas
+      (id_jugador, estatura, peso, overall, ritmo, tiro, pase, defensa, regate, fisico)
+      VALUES (
+        ${id_jugador},
+        ${req.body.estatura},
+        ${req.body.peso},
+        ${req.body.overall},
+        ${req.body.ritmo},
+        ${req.body.tiro},
+        ${req.body.pase},
+        ${req.body.defensa},
+        ${req.body.regate},
+        ${req.body.fisico}
+      )`);
+
+    res.send({message: "añadido correctamente"});
   } catch(error) {
     res.send(error.message);
   }
@@ -146,9 +173,19 @@ app.post("/jugadores", async function(req, res) {
 app.delete("/jugadores", async function(req, res) {
   try {
     await realizarQuery(
-      `DELETE FROM Jugadores
-       WHERE id_jugador=${req.body.id}`
+      `DELETE FROM Cartas WHERE id_jugador=${req.body.id}`
     );
+  } catch(error) {
+    res.send(error.message);
+  }
+});
+
+app.delete("/jugadores", async function(req, res) {
+  try {
+    await realizarQuery(
+      `DELETE FROM Jugadores WHERE id_jugador=${req.body.id}`
+    );
+    res.send({ message: "eliminado correctamente" });
   } catch(error) {
     res.send(error.message);
   }
@@ -158,16 +195,30 @@ app.delete("/jugadores", async function(req, res) {
 app.put("/jugadores", async function(req, res) {
   try {
     await realizarQuery(
-      `UPDATE Jugadores SET
+        `UPDATE Jugadores SET
         url_foto="${req.body.url_foto}",
         nombre="${req.body.nombre}",
         id_liga=${req.body.id_liga},
         liga="${req.body.liga}",
         pais="${req.body.pais}",
-        id_region=${req.body.id_region},
+        id_pais=${req.body.id_pais},
         posicion=${req.body.posicion}
-       WHERE id_jugador=${req.body.id}`
+        WHERE id_jugador=${req.body.id}`
     );
+    await realizarQuery(
+      `UPDATE Cartas SET
+        estatura=${req.body.estatura},
+        peso=${req.body.peso},
+        overall=${req.body.overall},
+        ritmo=${req.body.ritmo},
+        tiro=${req.body.tiro},
+        pase=${req.body.pase},
+        defensa=${req.body.defensa},
+        regate=${req.body.regate},
+        fisico=${req.body.fisico}
+        WHERE id_jugador=${req.body.id}`
+    );
+    res.send({ message: "actualizado correctamente" });
   } catch(error) {
     res.send(error.message);
   }

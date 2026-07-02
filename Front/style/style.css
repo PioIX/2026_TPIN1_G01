@@ -555,6 +555,63 @@ main.main-admin {
     margin-top: 1rem;
 }
 
+.stats-label {
+    color: rgba(255,255,255,0.5);
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    font-weight: bold;
+    margin: 0.2rem 0 0 0;
+}
+
+/*==========================
+    BOTONES CREAR / EDITAR
+
+.mode-toggle{
+    display: flex;
+    gap: 12px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.toggle-btn{
+    flex: 1;
+    padding: 14px;
+    border: 2px solid #3a3a3a;
+    border-radius: 12px;
+    background: #252525;
+    color: #d6d6d6;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all .25s ease;
+}
+
+.toggle-btn:hover{
+    transform: translateY(-2px);
+    background: #323232;
+    color: white;
+}
+
+/* BOTÓN SELECCIONADO */
+
+.toggle-btn.active{
+    color: white;
+    border-color: transparent;
+    transform: translateY(-2px);
+}
+
+/* CREAR */
+
+#btn-modo-crear.active{
+    background: linear-gradient(135deg,#19b44d,#0b8d38);
+    box-shadow: 0 0 18px rgba(25,180,77,.45);
+}
+
+/* EDITAR */
+
+#btn-modo-editar.active{
+    background: linear-gradient(135deg,#1e88e5,#1565c0);
+    box-shadow: 0 0 18px rgba(30,136,229,.45);
 .main-game {
     display: flex;
     justify-content: center;
