@@ -34,7 +34,7 @@ app.get("/jugadores", async function (req, res) {
             result = await realizarQuery(`SELECT nombre,id_liga,liga,id_pais,pais,posicion,Cartas.* FROM Jugadores INNER JOIN Cartas ON Cartas.id_jugador = Jugadores.id_jugador ORDER BY RAND() LIMIT 100`)
         } else {
 
-            result = await realizarQuery(`SELECT nombre,id_liga,liga,id_pais,pais,posicion,Cartas.* FROM Jugadores INNER JOIN Cartas ON Cartas.id_jugador = Jugadores.id_jugador WHERE ${req.query.categoria}=${req.query.filtro} ORDER BY RAND() LIMIT 100`)
+            result = await realizarQuery(`SELECT url_foto,nombre,id_liga,liga,id_pais,pais,posicion,Cartas.* FROM Jugadores INNER JOIN Cartas ON Cartas.id_jugador = Jugadores.id_jugador WHERE ${req.query.categoria}="${req.query.filtro}" ORDER BY RAND() LIMIT 100`)
         }
 
         res.send(result)
@@ -224,3 +224,53 @@ app.put("/jugadores", async function(req, res) {
   }
 });
 
+app.get("/filtro", async function(req, res) {
+  try {
+    result = await realizarQuery(`SELECT ${req.query.categoria} FROM Jugadores GROUP BY ${req.query.categoria} ORDER BY COUNT(${req.query.categoria}) DESC LIMIT 10`);
+    res.send(result);
+
+  } catch (error) {
+    res.send({ error: error.message });
+  }
+})
+
+app.post("/puntaje", async function(req, res) {
+  try {
+    await realizarQuery(`INSERT INTO Partidas
+       (puntajes,fecha,id_usuario)
+       VALUES (
+        ${req.body.puntaje},
+        "${req.body.fecha}",
+        ${req.body.id_usuario}
+        )`);
+    res.send("añadido correctamente");
+  } catch(error) {
+    res.send(error.message);
+  }
+});
+
+app.get('/puntaje', async function (req, res) {
+    try {
+      let query=`SELECT Partidas.id_usuario,Usuarios.nombre_usuario,puntajes,fecha 
+From Partidas 
+inner Join Usuarios on Usuarios.id_usuario=Partidas.id_usuario`
+      let condiciones=[];
+      if (req.query.user !== undefined) {
+            condiciones.push(`Partidas.id_usuario = ${req.query.user}`);
+        }
+
+      if (req.query.tiempo !== undefined) {
+            condiciones.push("fecha >= NOW() - INTERVAL 1 MONTH");
+        }
+
+      if (condiciones.length > 0) {
+            query += " WHERE " + condiciones.join(" AND ");
+        }
+      query += " ORDER BY puntajes DESC";
+        let respuesta = await realizarQuery(query);
+        res.send(respuesta);
+    }
+    catch (error) {
+        res.status(500).send({ error: error.message });
+    }
+})

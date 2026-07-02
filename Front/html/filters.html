@@ -19,12 +19,30 @@
 		</div>
 	</header>
 	<main class="main-filtros">
+		<h3 class="filtros-title">FILTROS</h3>
+
+		<div class="filter-buttons">
+			<button class="filter-btn active" onclick="selectFilter('pais')">POR PAIS</button>
+			<button class="filter-btn" onclick="selectFilter('liga')">POR LIGA</button>
+			<button class="filter-btn" onclick="selectFilter('posicion')">POR POSICION</button>
+		</div>
+
+		<div id="select-container">
 		
+		</div>
+		<button id="limpiar" onclick="LimpiarFiltro()">Limpiar</button>
 	</main>
 	
+	<div class="volver-container">
+    	<a href="menu.html" class="btn btn-blanco">
+        	← Volver al menú
+    	</a>
+	</div>
+
 	<footer>
 		<hr>
 		<h4>pagina oficial de FIFALICHI © | <strong>FIFALICHI</strong> <b class="h_green">H</b>o<b class="l_red">L</b> | Borda, Garcea, Piscolichi y Rey</h4>
 	</footer>
+	<script src="../script/index.js"></script>
 </body>
 </html>
