@@ -52,21 +52,14 @@ async function id_pais() {
 
 async function login(mail,contraseña){
     const usuarios= await llamadoUsuarios();
+    console.log(usuarios)
     for (let usuario of usuarios){
         if (usuario.contrasena==contraseña && usuario.mail==mail){
             localStorage.setItem("usuarios", JSON.stringify(usuario));
             return usuario
-        } else if (usuario.contrasena==contraseña && usuario.mail!=mail){
-            alert("Mail incorrecto")
-            return false
-        } else if (usuario.contrasena!=contraseña && usuario.mail==mail){
-            alert("Contraseña incorrecta")
-            return false
-        } else if (usuario.contrasena!=contraseña && usuario.mail!=mail){
-            alert("Mail y contraseña incorrectos, usuario no registrado")
-            return false
         }
     }
+    alert("Mail o contraseña incorrectos")
     return false
 }
 
@@ -111,14 +104,17 @@ async function handleRegister() {
     register(datos)
 }
 
-async function eliminarFutbolista() {
+async function eliminarFutbolista(){
   const id = document.getElementById("del-id").value;
   if (!id) { alert("Ingresá un ID"); return; }
 
-  await fetch('http://localhost:4000/jugadores', {
+  await fetch('http://localhost:4000/jugadores'), {
     method: "DELETE",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ id: id })
+    }
+}
+
 async function logOut(){
     localStorage.removeItem("usuarios");
     window.location.href = "index.html";
@@ -268,7 +264,8 @@ async function guardarJugador(){
         alert("Jugador editado correctamente.");
 
     }
-
+    
+}
 async function selectFilter(filtro) {
     document.querySelectorAll(".filter-btn").forEach(btn => btn.classList.remove("active"));
     event.target.classList.add("active");
