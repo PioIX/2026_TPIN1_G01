@@ -125,6 +125,7 @@ function add_regate() {
 
 function add_fisico() {
     return document.getElementById("add-fisico").value;
+}
 function add_posicion(){
     return document.getElementById("add-posicion").value
 }

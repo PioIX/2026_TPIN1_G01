@@ -1,6 +1,6 @@
 let puntos=0;
 let jugadores;
-let modo=JSON.parse(localStorage.getItem("modo"))
+modo=JSON.parse(localStorage.getItem("modo"))
 let filtro=JSON.parse(localStorage.getItem("filtro"))
 
 
@@ -119,7 +119,7 @@ async function juego(){
                 perder = true;
                 document.getElementById("txt-msj").innerHTML = "¡Perdiste en esta comparación!";
                 await esperar(3000);
-                
+                break
             }
             document.getElementById("txt-msj").innerHTML="bien hecho";
             puntos+=1
