@@ -99,6 +99,7 @@ async function juego(){
                 perder = true;
                 document.getElementById("txt-msj").innerHTML = "¡Perdiste en esta comparación!";
                 await esperar(3000);
+                
             }
             document.getElementById("txt-msj").innerHTML="bien hecho";
             await esperar(3000)

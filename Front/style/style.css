@@ -582,7 +582,7 @@ main.main-admin {
     color: white;
 }
 
-/* ---------- FILTROS PAGE ---------- */
+/* FILTROS PAGE */
 .filtros-title {
     color: white;
     font-size: 1.6rem;
@@ -690,6 +690,8 @@ main.main-admin {
     transform: scale(0.98);
 }
 
+
+
 /* BOTON LIMPIAR */
 #limpiar {
     padding: 0.8rem 1.5rem;
@@ -715,7 +717,7 @@ main.main-admin {
     transform: scale(0.98);
 }
 
-/* ---------- PLAYER CARD CON FONDO ---------- */
+/*  PLAYER CARD CON FONDO  */
 .player-card {
     position: relative;
     display: flex;
@@ -776,3 +778,96 @@ main.main-admin {
     transform: scale(0.98);
 }
 
+/*  MENSAJE DE RESULTADO  */
+
+.main-game {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 150px;
+    flex-wrap: wrap;
+}
+
+#mensaje {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: -20px;
+}
+
+#txt-msj {
+    min-width: 320px;
+    padding: 18px 40px;
+    border-radius: 12px;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+    color: white;
+
+    background: rgba(0, 0, 0, 0.7);
+    border: 2px solid #2ecc40;
+
+    box-shadow:
+        0 0 20px rgba(46, 204, 64, .45),
+        inset 0 0 12px rgba(46, 204, 64, .15);
+
+    text-transform: uppercase;
+
+    transition: .3s;
+}
+
+/* BOTONES DEL MODO DE JUEGO */
+
+.modo-botones{
+    width: 100%;
+    max-width: 500px;
+    margin: 18px auto 0;
+    display: flex;
+    gap: 15px;
+}
+
+/* Estilo base */
+#btn-modo,
+#limpiar-modo{
+    flex: 1;
+    padding: 14px 18px;
+    border: none;
+    border-radius: 6px;
+    font-size: .95rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: .2s;
+}
+
+/* ACEPTAR */
+#btn-modo{
+    background: #2ecc40;
+    color: white;
+    box-shadow: 0 0 15px rgba(46,204,64,.35);
+}
+
+#btn-modo:hover{
+    transform: translateY(-2px);
+    filter: brightness(1.08);
+    box-shadow: 0 0 24px rgba(46,204,64,.6);
+}
+
+/* LIMPIAR */
+#limpiar-modo{
+    background: #e74c3c;
+    color: white;
+    box-shadow: 0 0 15px rgba(231,76,60,.35);
+}
+
+#limpiar-modo:hover{
+    transform: translateY(-2px);
+    filter: brightness(1.08);
+    box-shadow: 0 0 24px rgba(231,76,60,.6);
+}
+
+#btn-modo:active,
+#limpiar-modo:active{
+    transform: scale(.97);
+}
