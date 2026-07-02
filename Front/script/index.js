@@ -162,7 +162,7 @@ function aceptarModo(){
         localStorage.setItem("modo", JSON.stringify(valor));
 }
 
-function LimpiarModo(){
+function limpiarModo(){
     localStorage.removeItem("modo");
 }
 
