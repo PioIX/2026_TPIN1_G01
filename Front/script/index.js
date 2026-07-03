@@ -347,17 +347,15 @@ async function mostrarTabla(){
 			</thead>`
     for (let i=0;i<puntajes.length;i++){
 
-        if (puntajes[i].id_usuario==user.id_usuario){
-            tabla.innerHTML+="<tr class=propio>"
-        }else{
-            tabla.innerHTML+="<tr>"
-        }
-        tabla.innerHTML+=`
-				<td>${i+1}</td>
-				<td>${puntajes[i].nombre_usuario}</td>
-				<td>${puntajes[i].puntajes}</td>
-				<td>${puntajes[i].fecha.slice(0, 10)}</td>
-			</tr>`
+    const clase = (puntajes[i].id_usuario == user.id_usuario) ? "propio" : "";
+
+    tabla.innerHTML += `
+        <tr class="${clase}">
+            <td>${i+1}</td>
+            <td>${puntajes[i].nombre_usuario}</td>
+            <td>${puntajes[i].puntajes}</td>
+            <td>${puntajes[i].fecha.slice(0, 10)}</td>
+        </tr>`;
     }
 }
 
@@ -365,7 +363,7 @@ function tablaPersonal(){
     caracteristicaTabla[0]=user.id_usuario
     mostrarTabla(caracteristicaTabla)
 }
-function tablaMes(){
+function tablaSemana(){
     caracteristicaTabla[1]=1
     mostrarTabla(caracteristicaTabla)
 }

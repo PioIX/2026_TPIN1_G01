@@ -800,9 +800,9 @@ main.main-admin {
 }
 
 .player-card .player-img {
-    max-width: 140px;
+    max-width: 200px;
     height: auto;
-    margin: 0.3rem 0;
+    margin: 4rem 0 0.3rem 0; 
 }
 
 .player-card .player-text:last-of-type {
@@ -1102,9 +1102,19 @@ main.main-admin {
     background: rgba(255, 255, 255, 0.15);
 }
 
-#tabla tr.propio{
-    background: rgba(46,204,64,.28);
+#tabla tr.propio {
+    background: rgba(46, 204, 64, .22);
     font-weight: bold;
+    border-left: 4px solid #2ecc40;
+    box-shadow: inset 0 0 12px rgba(46, 204, 64, .25);
+}
+
+#tabla tr.propio:hover {
+    background: rgba(46, 204, 64, .32);
+}
+
+#tabla tr.propio td:first-child {
+    color: #2ecc40;
 }
 
 #tabla td:first-child{
@@ -1125,4 +1135,61 @@ main.main-admin {
 
 #tabla td:nth-child(4){
     color: #d5d5d5;
+}
+
+
+
+.resultado-panel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.65);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.2rem;
+    z-index: 1000;
+    padding: 1rem;
+}
+
+.resultado-panel[hidden] {
+    display: none;
+}
+
+.resultado-titulo,
+.puntaje-display,
+.resultado-botones {
+    width: 100%;
+    max-width: 420px;
+}
+
+.resultado-titulo {
+    color: white;
+    font-size: 1.6rem;
+    letter-spacing: 2px;
+    font-weight: bold;
+    text-align: center;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid rgba(46, 204, 64, 0.4);
+}
+
+.puntaje-display {
+    color: #2ecc40;
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    letter-spacing: 2px;
+    text-shadow: 0 0 16px rgba(46, 204, 64, 0.5);
+}
+
+.resultado-botones {
+    display: flex;
+    gap: 1rem;
+}
+
+.resultado-botones .btn {
+    flex: 1;
 }

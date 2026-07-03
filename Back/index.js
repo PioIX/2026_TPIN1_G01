@@ -260,7 +260,7 @@ inner Join Usuarios on Usuarios.id_usuario=Partidas.id_usuario`
         }
 
       if (req.query.tiempo !== undefined) {
-            condiciones.push("fecha >= NOW() - INTERVAL 1 MONTH");
+            condiciones.push("fecha >= NOW() - INTERVAL 7 DAY");
         }
 
       if (condiciones.length > 0) {
