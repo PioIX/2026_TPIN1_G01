@@ -1,6 +1,6 @@
 let puntos=0;
 let jugadores;
-let modo=JSON.parse(localStorage.getItem("modo"))
+modo=JSON.parse(localStorage.getItem("modo"))
 let filtro=JSON.parse(localStorage.getItem("filtro"))
 
 
