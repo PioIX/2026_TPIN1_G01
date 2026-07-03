@@ -158,8 +158,6 @@ let idEditar = null;
 
 function seleccionarModo(boton){
 
-
-
     console.log(boton);
     console.log(boton.value);
 
@@ -301,11 +299,16 @@ async function selectFilter(filtro) {
     }
     function LimpiarFiltro(){
         localStorage.removeItem("filtro");
+        document.getElementById("select-container").innerHTML = '';
     }
 
 function aceptarModo(){
     const valor=document.getElementById("select-modo").value;
-        localStorage.setItem("modo", JSON.stringify(valor));
+    if (valor=="") {
+        limpiarModo();
+        return
+    }
+    localStorage.setItem("modo", JSON.stringify(valor));
 }
 
 function limpiarModo(){
