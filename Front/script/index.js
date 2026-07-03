@@ -104,17 +104,15 @@ async function handleRegister() {
     register(datos)
 }
 
-async function eliminarFutbolista(){
+async function eliminarFutbolista() {
   const id = document.getElementById("del-id").value;
   if (!id) { alert("Ingresá un ID"); return; }
 
-  await fetch('http://localhost:4000/jugadores'), {
+  await fetch('http://localhost:4000/jugadores', {
     method: "DELETE",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ id: id })
-    }
-}
-
+    }); }
 async function logOut(){
     localStorage.removeItem("usuarios");
     window.location.href = "index.html";
@@ -152,8 +150,6 @@ let modo = "crear";
 let idEditar = null;
 
 function seleccionarModo(boton){
-
-
 
     console.log(boton);
     console.log(boton.value);
@@ -228,7 +224,6 @@ async function guardarJugador(){
                 fisico: add_fisico()
             })
         });
-
         alert("Jugador creado correctamente.");
 
     }else{
@@ -264,7 +259,7 @@ async function guardarJugador(){
         alert("Jugador editado correctamente.");
 
     }
-    
+
 }
 async function selectFilter(filtro) {
     document.querySelectorAll(".filter-btn").forEach(btn => btn.classList.remove("active"));
@@ -298,11 +293,16 @@ async function selectFilter(filtro) {
     }
     function LimpiarFiltro(){
         localStorage.removeItem("filtro");
+        document.getElementById("select-container").innerHTML = '';
     }
 
 function aceptarModo(){
     const valor=document.getElementById("select-modo").value;
-        localStorage.setItem("modo", JSON.stringify(valor));
+    if (valor=="") {
+        limpiarModo();
+        return
+    }
+    localStorage.setItem("modo", JSON.stringify(valor));
 }
 
 function limpiarModo(){
