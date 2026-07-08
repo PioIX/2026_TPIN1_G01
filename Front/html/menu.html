@@ -1,39 +1,42 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>game menu</title>
-	<link rel="stylesheet" href="../style/style.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>game menu</title>
+    <link rel="stylesheet" href="../style/style.css">
     <link rel="icon" href="../images/icono/logo_FIFALICHI.ico">
 </head>
+
 <body>
-	<header class="main-header">
-		<div class="header-container">
-			<h1>FIFALICHI</h1>
-			<h2> <b class="higher_green">HIGHER</b> <b>o</b> <b><b class="lower_red">LOWER</b></b> </h2>
-			<div class="logo">
-				<img src="../images/logo_FIFALICHI.png" class="logo" alt="Logo de FIFALICHI">
-			</div>
-		</div>
-	</header>
-	<main class="main-menu">
+    <header class="main-header">
+        <div class="header-container">
+            <h1>FIFALICHI</h1>
+            <h2> <b class="higher_green">HIGHER</b> <b>o</b> <b><b class="lower_red">LOWER</b></b> </h2>
+            <div class="logo">
+                <img src="../images/logo_FIFALICHI.png" class="logo" alt="Logo de FIFALICHI">
+            </div>
+        </div>
+    </header>
+    <main class="main-menu">
         <div class="menu-botones">
             <div class="fila-jugar">
-                <button class="btn-info" onclick="document.getElementById('instrucciones').style.display='flex'">i</button>
+                <button class="btn-info"
+                    onclick="document.getElementById('instrucciones').style.display='flex'">i</button>
                 <a class="btn btn-jugar" href="game.html">JUGAR</a>
             </div>
-			<br>
+            <br>
             <a class="btn btn-blanco" href="filters.html">FILTROS</a>
-			<br>
+            <br>
             <a class="btn btn-blanco" href="mode.html">MODO</a>
-			<br>
+            <br>
             <a class="btn btn-blanco" href="points.html">TABLA DE PUNTAJE</a>
-			<br>
-            <button class="btn btn-rojo" onclick="logOut()" >CERRAR SESION</button>
+            <br>
+            <button class="btn btn-rojo" onclick="logOut()">CERRAR SESION</button>
         </div>
- 
+
         <div class="menu-logo">
             <img src="../images/logo_FIFALICHI.png" alt="Logo FIFALICHI">
         </div>
@@ -43,19 +46,25 @@
         <div class="modal-contenido">
             <span class="cerrar" onclick="document.getElementById('instrucciones').style.display='none'">&times;</span>
             <h2>Instrucciones</h2>
-            <p>En el juego van a aparecer 2 cartas de jugadores y una estadística de ellas (por ejemplo tiro,pase,etc.) y hay que adivinar cuál de las 2 es más alta y seguir hasta conseguir el puntaje más alto.</p>
+            <p>En el juego van a aparecer 2 cartas de jugadores y una estadística de ellas (por ejemplo tiro,pase,etc.)
+                y hay que adivinar cuál de las 2 es más alta y seguir hasta conseguir el puntaje más alto.</p>
             <p>Hay 2 formas de cambiar las cosas</p>
             <ul>
-                <li>En filtros se puede cambiar el tipo de jugadores que van a aparecer (por ejemplo solo jugadores de argentina, o solo jugadores de la liga española)</li>
-                <li>En modo se puede cambiar para que solo se juegue de una estadística específica (por ejemplo solo defensa) ademas se puede poner también peso y altura</li>
+                <li>En filtros se puede cambiar el tipo de jugadores que van a aparecer (por ejemplo solo jugadores de
+                    argentina, o solo jugadores de la liga española)</li>
+                <li>En modo se puede cambiar para que solo se juegue de una estadística específica (por ejemplo solo
+                    defensa) ademas se puede poner también peso y altura</li>
             </ul>
         </div>
     </div>
 
-	<footer>
-		<hr>
-		<h4>pagina oficial de FIFALICHI © | <strong>FIFALICHI</strong> <b class="h_green">H</b>o<b class="l_red">L</b> | Borda, Garcea, Piscolichi y Rey</h4>
-	</footer>
-	<script src="/Front/script/index.js"></script>
+    <footer>
+        <hr>
+        <h4>pagina oficial de FIFALICHI © | <strong>FIFALICHI</strong> <b class="h_green">H</b>o<b class="l_red">L</b> |
+            Borda, Garcea, Piscolichi y Rey</h4>
+    </footer>
+    <script src="../script/index.js"></script>
+
 </body>
+
 </html>

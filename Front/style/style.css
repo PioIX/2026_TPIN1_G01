@@ -1126,3 +1126,55 @@ main.main-admin {
 #tabla td:nth-child(4){
     color: #d5d5d5;
 }
+
+.resultado-panel {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 400px;
+    max-width: 90%;
+
+    padding: 2rem;
+
+    background: #10141f;
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 10px;
+
+    text-align: center;
+
+    box-shadow: 0 0 20px rgba(0,0,0,.4);
+    z-index: 1000;
+}
+
+.resultado-titulo {
+    color: white;
+    font-size: 1.6rem;
+    letter-spacing: 2px;
+    margin-bottom: 1.5rem;
+}
+
+.puntaje-display {
+    color: #2ecc40;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+}
+
+.resultado-botones {
+    display: flex;
+    gap: .8rem;
+}
+
+.resultado-botones .btn {
+    flex: 1;
+}
+
+.resultado-panel::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.5);
+    z-index: -1;
+}
