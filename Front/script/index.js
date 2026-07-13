@@ -56,7 +56,11 @@ async function login(mail,contraseña){
     for (let usuario of usuarios){
         if (usuario.contrasena==contraseña && usuario.mail==mail){
             localStorage.setItem("usuarios", JSON.stringify(usuario));
-            return usuario
+             if (usuario.es_admin == 1) {
+                return "es admin";
+            } else {
+                return "es usuario";
+            }
         }
     }
     alert("Mail o contraseña incorrectos")
@@ -67,9 +71,10 @@ async function handleLogin(){
     const mail=getMail()
     const contrasena=getContraseña()
     usuario= await login(mail,contrasena)
-    if(usuario){
+    if (usuario == "es usuario") {
         window.location.href = "menu.html";
-        return
+    } else if (usuario == "es admin") {
+        window.location.href = "admin.html";
     }
 }
 
