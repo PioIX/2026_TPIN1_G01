@@ -120,6 +120,8 @@ async function eliminarFutbolista() {
     }); }
 async function logOut(){
     localStorage.removeItem("usuarios");
+    localStorage.removeItem("modo");
+    localStorage.removeItem("filtro")
     window.location.href = "index.html";
 }
 
@@ -298,13 +300,14 @@ async function selectFilter(filtro) {
     }
     function LimpiarFiltro(){
         localStorage.removeItem("filtro");
-        document.getElementById("select-container").innerHTML = '';
+
+        document.getElementById("select-container").innerHTML=""
     }
 
 function aceptarModo(){
     const valor=document.getElementById("select-modo").value;
-    if (valor=="") {
-        limpiarModo();
+    if (valor==""){
+        limpiarModo()
         return
     }
     localStorage.setItem("modo", JSON.stringify(valor));

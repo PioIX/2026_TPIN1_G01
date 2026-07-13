@@ -118,8 +118,8 @@ async function juego(){
             if (!correcto) {
                 perder = true;
                 document.getElementById("txt-msj").innerHTML = "¡Perdiste en esta comparación!";
-                break;
-                
+                await esperar(3000);
+                break
             }
             document.getElementById("txt-msj").innerHTML="bien hecho";
             puntos+=1
