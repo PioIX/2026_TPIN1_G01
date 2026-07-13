@@ -800,9 +800,9 @@ main.main-admin {
 }
 
 .player-card .player-img {
-    max-width: 140px;
+    max-width: 200px;
     height: auto;
-    margin: 0.3rem 0;
+    margin: 4rem 0 0.3rem 0; 
 }
 
 .player-card .player-text:last-of-type {
@@ -1003,4 +1003,193 @@ main.main-admin {
 
 .cerrar:hover {
   color: #e74c3c;
+}
+
+
+
+/* ================================
+   TABLA DE PUNTAJES (points.html)
+   ================================ */
+
+#tabla-botones {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+    width: 100%;
+    max-width: 600px;
+}
+
+#tabla-user,
+#tabla-tiempo {
+    display: flex;
+    gap: 0.8rem;
+    width: 100%;
+}
+
+#tabla-botones button {
+    flex: 1;
+    padding: 0.8rem 1rem;
+    font-size: 0.85rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.04);
+    color: white;
+    cursor: pointer;
+    text-align: center;
+    transition: border-color 0.15s, box-shadow 0.15s, transform 0.1s, background 0.15s;
+}
+
+/* Hover: solo remarca el borde en verde neon, sin rellenar el fondo */
+#tabla-botones button:hover:not(.active) {
+    border-color: #2ecc40;
+    box-shadow: 0 0 10px rgba(46, 204, 64, 0.5);
+    transform: scale(1.02);
+}
+
+#tabla-botones button:active {
+    transform: scale(0.98);
+}
+
+/* Seleccionado: se rellena todo el cuadrado en verde */
+#tabla-botones button.active {
+    background: #2ecc40;
+    border-color: #2ecc40;
+    color: white;
+    box-shadow: 0 0 16px rgba(46, 204, 64, 0.4);
+}
+
+#tabla{
+    width: 100%;
+    max-width: 900px;
+    margin-top: 20px;
+    border-collapse: collapse;
+    overflow: hidden;
+    border-radius: 10px;
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(255,255,255,.08);
+    box-shadow: 0 0 20px rgba(0,0,0,.35);
+}
+
+#tabla th{
+    background: #2ecc40;
+    color: white;
+    padding: 15px;
+    font-size: .9rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+#tabla td{
+    padding: 14px;
+    color: white;
+    text-align: center;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+#tabla tr{
+    transition: .2s;
+}
+
+#tabla tr:nth-child(even){
+    background: rgba(255,255,255,.03);
+}
+
+#tabla tr:hover{
+    background: rgba(255, 255, 255, 0.15);
+}
+
+#tabla tr.propio {
+    background: rgba(46, 204, 64, .22);
+    font-weight: bold;
+    border-left: 4px solid #2ecc40;
+    box-shadow: inset 0 0 12px rgba(46, 204, 64, .25);
+}
+
+#tabla tr.propio:hover {
+    background: rgba(46, 204, 64, .32);
+}
+
+#tabla tr.propio td:first-child {
+    color: #2ecc40;
+}
+
+#tabla td:first-child{
+    width: 70px;
+    font-weight: bold;
+}
+
+#tabla td:nth-child(2){
+    text-align: left;
+    padding-left: 25px;
+}
+
+#tabla td:nth-child(3){
+    color: #2ecc40;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+#tabla td:nth-child(4){
+    color: #d5d5d5;
+}
+
+
+
+.resultado-panel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.65);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.2rem;
+    z-index: 1000;
+    padding: 1rem;
+}
+
+.resultado-panel[hidden] {
+    display: none;
+}
+
+.resultado-titulo,
+.puntaje-display,
+.resultado-botones {
+    width: 100%;
+    max-width: 420px;
+}
+
+.resultado-titulo {
+    color: white;
+    font-size: 1.6rem;
+    letter-spacing: 2px;
+    font-weight: bold;
+    text-align: center;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid rgba(46, 204, 64, 0.4);
+}
+
+.puntaje-display {
+    color: #2ecc40;
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    letter-spacing: 2px;
+    text-shadow: 0 0 16px rgba(46, 204, 64, 0.5);
+}
+
+.resultado-botones {
+    display: flex;
+    gap: 1rem;
+}
+
+.resultado-botones .btn {
+    flex: 1;
 }
